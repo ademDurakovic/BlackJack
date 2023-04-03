@@ -10,7 +10,7 @@ public class BlackJackGui {
     JPanel mainPanel;
     ImageIcon icon;
     JLabel imageLabel; 
-    private bjbuttons buttons;
+    private BlackJackButtons buttons;
 
     public BlackJackGui(){
         JFrame mainFrame = new JFrame("BlackJack");
@@ -22,15 +22,12 @@ public class BlackJackGui {
         imageLabel = new JLabel(icon);
         mainPanel.add(imageLabel);
 
-        buttons = new bjbuttons();
+        buttons = new BlackJackButtons();
         buttons.setOpaque(false);
         mainPanel.add(buttons);
 
         mainFrame.add(mainPanel);
         mainFrame.pack();
         mainFrame.setVisible(true);
-    }
-    public static void main(String []args){
-        bjtest test = new bjtest();
     }
 }
