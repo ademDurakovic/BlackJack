@@ -3,9 +3,11 @@
  */
 package blackjack;
 
+import blackjack.view.BlackJackGui;
+
 public class App {
 
     public static void main(String[] args) {
-        
+        BlackJackGui blackJackGui = new BlackJackGui();
     }
 }
