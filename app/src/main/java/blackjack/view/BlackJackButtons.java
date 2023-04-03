@@ -4,7 +4,7 @@ import java.awt.GridLayout;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class bjbuttons extends JPanel {
+public class BlackJackButtons extends JPanel {
     private JButton []buttons;
     
     public BlackJackButtons(){
