@@ -10,6 +10,7 @@ public class BlackJackGui {
     ImageIcon icon;
     JLabel imageLabel; 
     private BlackJackButtons buttons;
+    private ChipButtons chips;
 
     public BlackJackGui(){
         mainFrame = new JFrame("BlackJack");
@@ -47,6 +48,15 @@ public class BlackJackGui {
         buttons = new BlackJackButtons();
         buttons.setOpaque(false);
 
+        //trial for chips panel
+        // JPanel chipsPanel = new JPanel();
+        // chipsPanel.setOpaque(false);
+
+        // secondPanel.setLayout(new BoxLayout(chipsPanel, BoxLayout.Y_AXIS));
+
+        // chips = new ChipButtons();
+        // chips.setOpaque(false);
+
         JPanel betPanel = new JPanel();
         betPanel.setOpaque(false);
         betPanel.setLayout(new BoxLayout(betPanel, BoxLayout.Y_AXIS));
@@ -71,6 +81,7 @@ public class BlackJackGui {
         betPanel.add(betAmount);
 
         secondPanel.add(buttons);
+        // secondPanel.add(chipsPanel);
         secondPanel.add(balance);
 
         mainPanel.add(secondPanel);
