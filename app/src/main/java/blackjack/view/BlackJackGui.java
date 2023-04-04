@@ -19,22 +19,38 @@ public class BlackJackGui {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension screen = toolkit.getScreenSize();
 
+        mainFrame.setPreferredSize(new Dimension((int)screen.getWidth(),(int)screen.getHeight()));
+
         mainPanel = new JPanel();
         BoxLayout layout = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
         mainPanel.setLayout(layout);
-        mainPanel.setBackground(Color.RED);
-        mainPanel.setPreferredSize(new Dimension((int)screen.getWidth(),(int)screen.getHeight()));
+        mainPanel.setBackground(new Color(151,42,39));
         mainFrame.add(mainPanel);
 
+        //image of table
         icon = new ImageIcon("/Users/amarh/csci2300/team_project-group12/app/src/main/resources/blackjack_table.png");
         imageLabel = new JLabel(icon);
-        imageLabel.setBorder(BorderFactory.createEmptyBorder());
+        imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainPanel.add(imageLabel);
+
+        //creation of second panel
+        JPanel secondPanel = new JPanel();
+        secondPanel.setOpaque(false);
+        secondPanel.setLayout(new BoxLayout(secondPanel, BoxLayout.X_AXIS));
 
         buttons = new BlackJackButtons();
         buttons.setOpaque(false);
-        mainPanel.add(buttons);
 
+        JTextField betAmount = new JTextField("Enter Bet Amount");
+
+        JTextArea balance = new JTextArea("Balance: $1,000,000");
+        balance.setOpaque(false);
+
+        secondPanel.add(betAmount);
+        secondPanel.add(buttons);
+        secondPanel.add(balance);
+
+        mainPanel.add(secondPanel);
         mainFrame.pack();
         mainFrame.setVisible(true);
     }
