@@ -18,7 +18,7 @@ public class BlackJackButtons extends JPanel {
 
         for(int i = 0; i < 5; i++){
             this.buttons[i] = new JButton(actions[i]);
-            if(i == 0 || i == 4){
+            if(i == 0 || i == 1){
                 this.buttons[i].setEnabled(false);
             }
             this.buttons[i].setPreferredSize(new Dimension(150,50));
