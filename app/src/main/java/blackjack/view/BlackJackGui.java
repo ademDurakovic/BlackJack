@@ -24,7 +24,7 @@ public class BlackJackGui {
         System.out.println("height: "+ screen.getHeight());
 
         mainPanel = new JPanel();
-        mainPanel.setPreferredSize(new Dimension(1400,750));
+        mainPanel.setPreferredSize(new Dimension(1440,900));
         BoxLayout layout = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
         mainPanel.setLayout(layout);
         mainPanel.setBackground(new Color(151,42,39));
@@ -50,7 +50,7 @@ public class BlackJackGui {
         layeredPane.add(kingLabel, Integer.valueOf(1));
 
         JLabel kingLabel2 = new JLabel(king);
-        kingLabel2.setBounds(620, 460, king.getIconWidth(), king.getIconHeight());
+        kingLabel2.setBounds(670, 480, king.getIconWidth(), king.getIconHeight());
         layeredPane.add(kingLabel2, Integer.valueOf(1));
 
         JLabel kingLabel3 = new JLabel(king);
@@ -61,43 +61,43 @@ public class BlackJackGui {
         JLabel backCard = new JLabel(back);
         backCard.setBounds(700, 132, back.getIconWidth(), back.getIconHeight());
         layeredPane.add(backCard, Integer.valueOf(1));
-
         mainPanel.add(layeredPane);
 
         //creation of second panel for buttons/betting
         JPanel secondPanel = new JPanel();
         secondPanel.setOpaque(false);
-
-        secondPanel.setLayout(new FlowLayout(FlowLayout.CENTER,50,10));
+        secondPanel.setLayout(new FlowLayout(FlowLayout.CENTER,50,0));
+        secondPanel.setPreferredSize(new Dimension(100,35));
 
         buttons = new BlackJackButtons();
         buttons.setOpaque(false);
 
-        JPanel betPanel = new JPanel();
-        betPanel.setOpaque(false);
-        betPanel.setLayout(new BoxLayout(betPanel, BoxLayout.Y_AXIS));
-        secondPanel.add(betPanel);
+        //creates chips
+        ChipButtons chips = new ChipButtons();
+        chips.setOpaque(false);
+        secondPanel.add(chips);
+        
 
-        JLabel betArea = new JLabel("Enter Bet Amount:");
-        betArea.setFont(new Font("serif", Font.CENTER_BASELINE, 24));
-        betArea.setForeground(new Color(202,151,74));
-        betArea.setOpaque(false);
-
-        JTextField betAmount = new JTextField();
-        betAmount.setHorizontalAlignment(JTextField.CENTER);
-        betAmount.setText("$1000");
-        betAmount.setEnabled(false);
+        //panel to hold current bet and total balance
+        JPanel balanceAndBet = new JPanel();
+        balanceAndBet.setLayout(new BoxLayout(balanceAndBet, BoxLayout.Y_AXIS));
+        balanceAndBet.setAlignmentY(Component.CENTER_ALIGNMENT);
+        balanceAndBet.setOpaque(false);
 
         JLabel balance = new JLabel("Balance: $1,000,000");
         balance.setFont(new Font("serif", Font.CENTER_BASELINE, 24));
         balance.setForeground(new Color(202,151,74));
         balance.setOpaque(false);
+        balanceAndBet.add(balance);
 
-        betPanel.add(betArea);
-        betPanel.add(betAmount);
+        JLabel currentBet = new JLabel("Current Bet: $25,000");
+        currentBet.setFont(new Font("serif", Font.CENTER_BASELINE, 24));
+        currentBet.setForeground(new Color(202,151,74));
+        currentBet.setOpaque(false);
+        balanceAndBet.add(currentBet);
 
         secondPanel.add(buttons);
-        secondPanel.add(balance);
+        secondPanel.add(balanceAndBet);
 
         mainPanel.add(secondPanel);
         mainFrame.pack();
