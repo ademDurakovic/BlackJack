@@ -36,36 +36,35 @@ public class BlackJackGui {
         ImageIcon king = new ImageIcon(classLoader.getResource("king.png"));
         ImageIcon back = new ImageIcon(classLoader.getResource("FlippedCard.png"));
 
-        imageLabel = new JLabel(ticon);
-        imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        GridLayout gridLayout = new GridLayout(2, 2);
-        imageLabel.setLayout(gridLayout);
+        /* creation pf layered pane with table backround*/
+        JLayeredPane layeredPane = new JLayeredPane();   
+        layeredPane.setPreferredSize(new Dimension(500, 500));
+        JLabel backgroundLabel = new JLabel(ticon);
+        backgroundLabel.setBounds(200, 0, ticon.getIconWidth(), ticon.getIconHeight());
+        layeredPane.add(backgroundLabel, Integer.valueOf(0));
 
-        gridLayout.setHgap(-850);
-        gridLayout.setVgap(-200);
-        mainPanel.add(imageLabel);
+        /*Following is process to create a card and manually add to scene. */
+        resize(.125, king);
+        JLabel kingLabel = new JLabel(king);
+        kingLabel.setBounds(700, 460, king.getIconWidth(), king.getIconHeight());  //can use x and y to give exact cords.
+        layeredPane.add(kingLabel, Integer.valueOf(1));
 
-        resize(.145, king);
-        resize(.1, back);
-        JLabel imageLabelCard = new JLabel(back);
-        imageLabelCard.setAlignmentX(Component.CENTER_ALIGNMENT);
-        imageLabel.add(imageLabelCard);
+        JLabel kingLabel2 = new JLabel(king);
+        kingLabel2.setBounds(620, 460, king.getIconWidth(), king.getIconHeight());
+        layeredPane.add(kingLabel2, Integer.valueOf(1));
 
+        JLabel kingLabel3 = new JLabel(king);
+        kingLabel3.setBounds(620, 143, king.getIconWidth(), king.getIconHeight());
+        layeredPane.add(kingLabel3, Integer.valueOf(1));
 
-        JLabel imageLabelCard2 = new JLabel(king);
-        imageLabelCard.setAlignmentX(Component.CENTER_ALIGNMENT);
-        imageLabel.add(imageLabelCard2);
+        resize(.09, back);
+        JLabel backCard = new JLabel(back);
+        backCard.setBounds(700, 132, back.getIconWidth(), back.getIconHeight());
+        layeredPane.add(backCard, Integer.valueOf(1));
 
-        JLabel imageLabelCard3 = new JLabel(king);
-        imageLabelCard.setAlignmentX(Component.CENTER_ALIGNMENT);
-        imageLabel.add(imageLabelCard3);
+        mainPanel.add(layeredPane);
 
-        JLabel imageLabelCard4 = new JLabel(king);
-        imageLabelCard.setAlignmentX(Component.CENTER_ALIGNMENT);
-        imageLabel.add(imageLabelCard4);
-
-
-        //creation of second panel
+        //creation of second panel for buttons/betting
         JPanel secondPanel = new JPanel();
         secondPanel.setOpaque(false);
 
