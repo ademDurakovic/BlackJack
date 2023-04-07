@@ -10,7 +10,7 @@ public class ChipButtons extends JPanel{
 
     public ChipButtons(){
         this.chipValues = new JButton[8];
-        String[] Values = {"$1","$5", "$10", "$20","$25", "$100", "$500", "$1,000"};
+        String[] Values = {"$1","$5", "$10", "$20","$50", "$100", "$500", "$1,000"};
         int[] Colors = {0x4a071d, 0xeb1f10, 0xed9209, 0xf7e40a, 0x018508, 0x000000, 0x5e07ba, 0x4a071d};
         this.setLayout(new GridLayout(3, 3));
         
