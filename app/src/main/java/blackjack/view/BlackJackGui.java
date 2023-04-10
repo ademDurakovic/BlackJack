@@ -84,6 +84,7 @@ public class BlackJackGui {
         balanceAndBet.setAlignmentY(Component.CENTER_ALIGNMENT);
         balanceAndBet.setOpaque(false);
 
+
         JLabel debt = new JLabel("Debt: $5,000");
         debt.setFont(new Font("serif", Font.CENTER_BASELINE, 24));
         debt.setForeground(new Color(139,0,35));
@@ -102,6 +103,10 @@ public class BlackJackGui {
         balanceAndBet.add(currentBet);
 
         balanceAndBet.add(debt);
+
+        JButton loaButton = new JButton("Need more $$$?");
+        loaButton.setFont(new Font("serif", Font.CENTER_BASELINE, 24));
+        balanceAndBet.add(loaButton);
 
         secondPanel.add(buttons);
         secondPanel.add(balanceAndBet);

@@ -33,8 +33,19 @@ public class LoanShark {
         JLabel officeLabel = new JLabel(officeIcon);
         officeLabel.setBounds(0, 0, officeIcon.getIconWidth(), officeIcon.getIconHeight());
 
+        JLabel getLoan = new JLabel("Enter Loan Amount:");
+        getLoan.setForeground(Color.RED);
+        getLoan.setBounds(600,50,300,100);
+        getLoan.setFont(new Font("serif", Font.CENTER_BASELINE, 24));
+
+        JTextField loanEnter = new JTextField();
+        loanEnter.setBounds(820,90,100,35);
+
         layeredPane.add(officeLabel,1);
         layeredPane.add(sharkLabel,0);
+        layeredPane.add(getLoan,0);
+        layeredPane.add(loanEnter, 0);
+
         mainPanel.add(layeredPane);
         mainFrame.add(mainPanel);
         mainFrame.pack();
