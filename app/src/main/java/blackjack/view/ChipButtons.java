@@ -23,9 +23,9 @@ public class ChipButtons extends JPanel{
         ImageIcon[] chipPngs = {greenChip, orangeChip, blueChip, redChip, purpleChip};
         
         for(int i = 0; i < 5; i++){
-            resize(.1, chipPngs[i]);
+            resize(.15, chipPngs[i]);
             this.chipValues[i] = new JButton(chipPngs[i]);
-            this.chipValues[i].setPreferredSize(new Dimension(75,45));
+            this.chipValues[i].setPreferredSize(new Dimension(75,55));
             this.add(this.chipValues[i]);
         }
     }

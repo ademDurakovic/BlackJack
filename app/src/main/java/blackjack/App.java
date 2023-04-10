@@ -4,10 +4,12 @@
 package blackjack;
 
 import blackjack.view.BlackJackGui;
+import blackjack.view.LoanShark;
 
 public class App {
 
     public static void main(String[] args) {
         BlackJackGui blackJackGui = new BlackJackGui();
+        LoanShark loanSharkGUI = new LoanShark();
     }
 }
