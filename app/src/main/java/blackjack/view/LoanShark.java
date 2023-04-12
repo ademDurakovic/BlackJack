@@ -25,9 +25,9 @@ public class LoanShark {
 
         ClassLoader classLoader = getClass().getClassLoader();
         ImageIcon sharkIcon = new ImageIcon(classLoader.getResource("LoanShark.png"));
-        resize(0.25, sharkIcon);
+        resize(0.35, sharkIcon);
         JLabel sharkLabel = new JLabel(sharkIcon);
-        sharkLabel.setBounds(387, 290, sharkIcon.getIconWidth(), sharkIcon.getIconHeight());
+        sharkLabel.setBounds(360, 320, sharkIcon.getIconWidth(), sharkIcon.getIconHeight());
 
         ImageIcon officeIcon = new ImageIcon(classLoader.getResource("Office.png"));
         JLabel officeLabel = new JLabel(officeIcon);
@@ -41,10 +41,30 @@ public class LoanShark {
         JTextField loanEnter = new JTextField();
         loanEnter.setBounds(820,90,100,35);
 
-        layeredPane.add(officeLabel,1);
+        JButton goBack = new JButton("Go Back");
+        goBack.setBounds(850, 550, 75, 25);
+
+        JLabel payBack = new JLabel("Enter Amount to Payback: ");
+        payBack.setForeground(Color.RED);
+        payBack.setBounds(545,100,300,100);
+        payBack.setFont(new Font("serif", Font.CENTER_BASELINE, 24));
+
+        JTextField payBackAmount = new JTextField();
+        payBackAmount.setBounds(825,135,100,35);
+
+        JLabel currentDebt = new JLabel("Current Debt: $5000");
+        currentDebt.setForeground(Color.RED);
+        currentDebt.setFont(new Font("serif", Font.CENTER_BASELINE, 18));
+        currentDebt.setBounds(25, 25, 200, 50);
+
         layeredPane.add(sharkLabel,0);
+        layeredPane.add(officeLabel,1);
+        layeredPane.add(goBack,0);
         layeredPane.add(getLoan,0);
+        layeredPane.add(payBack, 0);
+        layeredPane.add(payBackAmount,0);
         layeredPane.add(loanEnter, 0);
+        layeredPane.add(currentDebt,0);
 
         mainPanel.add(layeredPane);
         mainFrame.add(mainPanel);

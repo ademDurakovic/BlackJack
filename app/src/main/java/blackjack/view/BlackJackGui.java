@@ -104,10 +104,6 @@ public class BlackJackGui {
 
         balanceAndBet.add(debt);
 
-        JButton loaButton = new JButton("Need more $$$?");
-        loaButton.setFont(new Font("serif", Font.CENTER_BASELINE, 24));
-        balanceAndBet.add(loaButton);
-
         secondPanel.add(buttons);
         secondPanel.add(balanceAndBet);
 

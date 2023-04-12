@@ -13,7 +13,7 @@ public class BlackJackButtons extends JPanel {
     
     public BlackJackButtons(){
         this.buttons = new JButton[5];
-        String[] actions = {"Bet","Double", "Hit", "Stand","Split"};
+        String[] actions = {"Bet","Double", "Hit", "Stand","Go To LoanShark"};
         this.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
         for(int i = 0; i < 5; i++){
