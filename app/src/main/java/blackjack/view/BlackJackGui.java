@@ -74,7 +74,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         buttons.setOpaque(false);
 
         //creates chips
-        ChipButtons chips = new ChipButtons();
+        ChipButtons chips = new ChipButtons(this);
         chips.setOpaque(false);
         secondPanel.add(chips);
         
@@ -121,8 +121,14 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
     @Override
     public void actionPerformed(ActionEvent event)
     {
-        BJButtons button = (BJButtons)event.getSource();
-        System.out.println(button.getIndex());
+        Object source = event.getSource();
+        if (source instanceof BJButtons){
+            BJButtons button = (BJButtons)source;
+            System.out.println(button.getIndex());
+        } else if (source instanceof ChipButton) {
+            ChipButton button = (ChipButton)source;
+            System.out.println(button.getValue());
+        }
     }
 
     public void resize(double scale, ImageIcon icon)
