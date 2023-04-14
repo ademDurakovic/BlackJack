@@ -13,64 +13,42 @@ public class CardDeck {
         private ClassLoader classLoader = getClass().getClassLoader();  //class loader to load .pnng
         private final String[] suits = {"club", "spade", "diamond", "heart"};  //array of suits so when we call randInt(5) we pick a random suit from here
 
-        private final String[] heartPngs = {"adem", "amar", "jack", "test"};  //will hold the .png's so we can load them into the hashmap.
-        private final String[] clubPngs = {"adem", "amar", "jack", "test"};
-        private final String[] spadePngs = {"adem", "amar", "jack", "test"};
-        private final String[] diamondPngs = {"adem", "amar", "jack", "test"};
+        private final String[] two_cards = {"2_of_spades.png", "2_of_hearts.png", "2_of_diamonds.png", "2_of_clubs.png"};  //will hold the .png's so we can load them into the hashmap.
+        private final String[] three_cards = {"3_of_spades.png", "3_of_hearts.png", "3_of_diamonds.png", "3_of_clubs.png"};
+        private final String[] four_cards = {"4_of_spades.png", "4_of_hearts.png", "4_of_diamonds.png", "4_of_clubs.png"};
+        private final String[] five_cards = {"5_of_spades.png", "5_of_hearts.png", "5_of_diamonds.png", "5_of_clubs.png"};
+        private final String[] six_cards = {"6_of_spades.png", "6_of_hearts.png", "6_of_diamonds.png", "6_of_clubs.png"};
+        private final String[] seven_cards = {"7_of_spades.png", "7_of_hearts.png", "7_of_diamonds.png", "7_of_clubs.png"};
+        private final String[] eight_cards = {"8_of_spades.png", "8_of_hearts.png", "8_of_diamonds.png", "8_of_clubs.png"};
+        private final String[] nine_cards = {"9_of_spades.png", "9_of_hearts.png", "9_of_diamonds.png", "9_of_clubs.png"};
+        private final String[] ten_cards = {"10_of_spades.png", "10_of_hearts.png", "10_of_diamonds.png", "10_of_clubs.png", 
+            "king_of_spades.png", "king_of_hearts.png", "king_of_diamonds.png", "king_of_clubs.png",
+            "queen_of_spades.png", "queen_of_hearts.png", "queen_of_diamonds.png", "queen_of_clubs.png",
+            "jack_of_spades.png", "jack_of_hearts.png", "jack_of_diamonds.png", "jack_of_clubs.png",
+        };
+
+        private final String[] eleven_cards = {"ace_of_spades.png", "ace_of_hearts.png", "ace_of_diamonds.png", "ace_of_clubs.png"};
+
+
     
 
-        private ArrayList<String> hearts = new ArrayList<String>();
-        private ArrayList<String> clubs = new ArrayList<String>();
-        private ArrayList<String> spades = new ArrayList<String>();
-        private ArrayList<String> diamonds = new ArrayList<String>();
+        private ArrayList<JLabel []> cardDeck = new ArrayList<JLabel []>();
+
+        /*We make arrays of JLabels which we can add to in constructor. */
+     
         
-
-
-
-        /*Suit is the key, ArrayList of .png or we can use ImageIcons is the value.*/
-        HashMap<String, ArrayList<String>> cardMap;  
 
         public CardDeck(){
-            /*Adding Png's to the arrayList that will be the value in the hashmap. */
-            //WE CAN CHANGE THIS TO BE IMAGEICONS.
-            for(int i = 0; i < 13; i++){
-                hearts.add(heartPngs[i]);
-                clubs.add(clubPngs[i]);
-                spades.add(spadePngs[i]);
-                diamonds.add(diamondPngs[i]);
-            }
-            /*Map the suit to an array of image paths. */
-            cardMap = new HashMap<>();
+            
+           /*  */
+      
+        }
 
-            /*Hashmap additions. */
-            cardMap.put("heart", hearts);
-            cardMap.put("club", clubs);
-            cardMap.put("spade", spades);   
-            cardMap.put("diamonds", diamonds); 
+        public JLabel makeLabel(String pngFile){      
+            ImageIcon tempIcon = new ImageIcon(classLoader.getResource(pngFile));
+            JLabel returnLabel = new JLabel(tempIcon);
+            return returnLabel;
         }
 
 
-        /* 
-        public JLabel getCard(){
-            Random rand = new Random();
-            //grab from the suit list at random.
-            int randSuit = rand.nextInt(5);  //5 not inclusive.
-            int randNum = rand.nextInt(14); //used to get card # in the suit array.
-            ArrayList<String> potentialCard = cardMap.get(suits[randSuit]);  //array of .pngs that we can use to make an ImageIcon and JLabl.
-            String newCard = potentialCard.get(randNum); //gets the random .png from the deck.
-
-            //if randNum is >= 10 the value is 10.
-
-            //TODO:
-            //creation of JLabel to pass over to main GUI so that it can be placed.
-
-        }
-        */
-  
-
-
-
-
-        
-        
 }
