@@ -2,5 +2,5 @@ package blackjack;
 
 public interface BlackJackObserver {
 
-    public void update();s
+    public void update();
 }
