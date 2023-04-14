@@ -9,7 +9,7 @@ public class ChipButtons extends JPanel{
 
     public ChipButtons(){
         this.chips = new ChipButton[5];
-        this.setLayout(new GridLayout(3, 3));
+        this.setLayout(new GridLayout(2, 4));
 
         String[] chipPngs = {"greenChip.png", "orangeChip.png", "blueChip.png", "redChip.png", "purpleChip.png"};
         

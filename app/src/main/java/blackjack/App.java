@@ -10,6 +10,5 @@ public class App {
 
     public static void main(String[] args) {
         BlackJackGui blackJackGui = new BlackJackGui();
-        LoanShark loanSharkGUI = new LoanShark();
     }
 }
