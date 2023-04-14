@@ -12,4 +12,9 @@ public class BJButtons extends JButton {
         this.index = index;
 
     }
+
+    public int getIndex()
+    {
+        return this.index;
+    }
 }

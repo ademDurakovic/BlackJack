@@ -11,7 +11,7 @@ import java.awt.event.*;
 public class BlackJackButtons extends JPanel {
     private BJButtons []buttons;
     
-    public BlackJackButtons(Table table, ActionListener buttonClickListener){
+    public BlackJackButtons(ActionListener buttonClickListener){
         this.buttons = new BJButtons[5];
         String[] actions = {"Bet","Double", "Hit", "Stand","Go To LoanShark"};
         this.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));

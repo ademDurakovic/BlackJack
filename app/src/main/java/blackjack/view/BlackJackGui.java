@@ -1,10 +1,11 @@
 package blackjack.view;
 
+import blackjack.BlackJackObserver;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class BlackJackGui {
+public class BlackJackGui implements ActionListener, BlackJackObserver{
     JFrame mainFrame;
     JPanel mainPanel;
     ImageIcon ticon;
@@ -69,7 +70,7 @@ public class BlackJackGui {
         secondPanel.setLayout(new FlowLayout(FlowLayout.CENTER,50,0));
         secondPanel.setPreferredSize(new Dimension(100,35));
 
-        buttons = new BlackJackButtons();
+        buttons = new BlackJackButtons(this);
         buttons.setOpaque(false);
 
         //creates chips
@@ -110,6 +111,18 @@ public class BlackJackGui {
         mainPanel.add(secondPanel);
         mainFrame.pack();
         mainFrame.setVisible(true);
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent event)
+    {
+        BJButtons button = (BJButtons)event.getSource();
+        System.out.println(button.getIndex());
     }
 
     public void resize(double scale, ImageIcon icon)
