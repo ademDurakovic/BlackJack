@@ -12,6 +12,7 @@ public class User{
     private Random cardGenerator;
     private int currentBalance;
     private ArrayList<BlackJackObserver> observers;
+    private int currentDebt;
 
     public User(){
         this.observers = new ArrayList<BlackJackObserver>();
@@ -20,8 +21,9 @@ public class User{
         this.handIndex = 0;
         this.isPlaying = true;
         this.cardGenerator = new Random();
-
+        this.currentDebt = 0;
     }
+
 
     public void deal(){
         hit();
@@ -53,9 +55,21 @@ public class User{
         this.isPlaying = false;
     }
 
+    public void placeBet(){
+
+    }
+
+    public void increaseBet(int bet){
+        
+    }
+
     public int getBalance()
     {
         return this.currentBalance;
+    }
+
+    public int getHandIndex(){
+        return this.handIndex;  //returns hand index.
     }
 
     public void register(BlackJackObserver o)
@@ -71,7 +85,5 @@ public class User{
         }
     }
 
-    public int getHandIndex(){
-        return this.handIndex;
-    }
+
 }
