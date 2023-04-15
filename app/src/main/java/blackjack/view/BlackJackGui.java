@@ -125,10 +125,14 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         if (source instanceof BJButtons){
             BJButtons button = (BJButtons)source;
             System.out.println(button.getIndex());
-            if(button.getIndex() == 2)
-            {
-                this.controller.userHit();
-            } 
+            int buttonIndex = button.getIndex();
+
+            switch(buttonIndex){
+                //case 0: this.controller.userPlacedBet();
+                case 2: this.controller.userHit();
+                        break;
+                default: break;
+            }
         } else if (source instanceof ChipButton) {
             ChipButton button = (ChipButton)source;
             this.controller.userIncreasedBet(button.getValue());
