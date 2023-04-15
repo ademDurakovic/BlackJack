@@ -13,6 +13,7 @@ public class User{
     private int currentBalance;
     private ArrayList<BlackJackObserver> observers;
     private int currentDebt;
+    private int currentBet;
 
     public User(){
         this.observers = new ArrayList<BlackJackObserver>();
@@ -22,6 +23,7 @@ public class User{
         this.isPlaying = true;
         this.cardGenerator = new Random();
         this.currentDebt = 0;
+        this.currentBet = 0;
     }
 
 
@@ -56,11 +58,17 @@ public class User{
     }
 
     public void placeBet(){
-
+        this.deal();
     }
 
     public void increaseBet(int bet){
-        
+
+        if((bet + this.currentBet) < this.currentBalance){  //checks if user can afford bet.
+            this.currentBet += bet;
+        }
+        else{
+            System.out.println("You cannot afford this bet, visit gustavo.");
+        }
     }
 
     public int getBalance()
