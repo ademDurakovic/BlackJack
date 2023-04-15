@@ -14,10 +14,10 @@ public class User{
     private ArrayList<BlackJackObserver> observers;
     private int currentDebt;
     private int currentBet;
-    private boolean betsPlaced;
+    private boolean initialBetPlaced;
 
     public User(){
-        betsPlaced = false;
+        initialBetPlaced = false;
         this.observers = new ArrayList<BlackJackObserver>();
         this.playerHand = new int[0];
         this.currentBalance = 5000;
@@ -32,7 +32,7 @@ public class User{
     public void initialDeal(){
         hit();
         hit();
-        betsPlaced = true;
+        initialBetPlaced = true;
         notifyObservers();
     }
 
@@ -71,7 +71,7 @@ public class User{
 
     public boolean betPlaced() 
     {
-        return this.betsPlaced;
+        return this.initialBetPlaced;
     }
     public int getBalance()
     {
