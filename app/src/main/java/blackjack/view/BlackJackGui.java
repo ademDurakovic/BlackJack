@@ -20,12 +20,15 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
     private JLabel debt;
     private JLabel balance;
     private JLabel currentBet;
+    private CardDeck deck;
+    private JLayeredPane layeredPane;
     
 
     public BlackJackGui(Controller controller, User model){
 
         this.controller = controller;
         this.model = model;
+        deck = new CardDeck();  //creation of cards.
 
         this.model.register(this);
         mainFrame = new JFrame("BlackJack");
@@ -49,7 +52,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         ImageIcon ticon = new ImageIcon(classLoader.getResource("blackjack_table.png"));
 
         /* creation pf layered pane with table backround*/
-        JLayeredPane layeredPane = new JLayeredPane();   
+        layeredPane = new JLayeredPane();   
         layeredPane.setPreferredSize(new Dimension(500, 500));
         JLabel backgroundLabel = new JLabel(ticon);
         backgroundLabel.setBounds(200, 0, ticon.getIconWidth(), ticon.getIconHeight());
@@ -116,6 +119,11 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         {
             buttons.enableButtonsAfterBets();
         }
+
+       // JLabel newCard = deck.pullCard(model.pullRandomCard());  //makes whole new card.
+
+        //newCard.setBounds(100, 100, 200, 50);
+        //layeredPane.add(newCard, 0);
     }
 
     @Override

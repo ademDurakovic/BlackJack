@@ -59,7 +59,7 @@ public class CardDeck {
         }
 
         public JLabel pullCard(int cardValue){
-            int realIndex = cardValue -2;
+            int realIndex = cardValue;
             String [] potentialCards = cardDeck.get(realIndex);
             String cardPng = potentialCards[rand.nextInt(potentialCards.length)];
             return makeLabel(cardPng);
@@ -67,8 +67,20 @@ public class CardDeck {
 
         public JLabel makeLabel(String pngFile){      
             ImageIcon tempIcon = new ImageIcon(classLoader.getResource(pngFile));
+            resize(0.5, tempIcon);
             JLabel returnLabel = new JLabel(tempIcon);
             return returnLabel;
+        }
+
+        public void resize(double scale, ImageIcon icon)
+        {
+           int height = icon.getIconHeight();
+           int width = icon.getIconWidth();
+           
+           height = (int)(height * scale);
+           width = (int)(width * scale);
+           Image image = icon.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
+           icon.setImage(image);
         }
 
 
