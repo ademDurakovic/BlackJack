@@ -44,11 +44,8 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         mainPanel.setBackground(new Color(151,42,39));
         mainFrame.add(mainPanel);
       
-      
         ClassLoader classLoader = getClass().getClassLoader();
         ImageIcon ticon = new ImageIcon(classLoader.getResource("blackjack_table.png"));
-        ImageIcon king = new ImageIcon(classLoader.getResource("king.png"));
-        ImageIcon back = new ImageIcon(classLoader.getResource("FlippedCard.png"));
 
         /* creation pf layered pane with table backround*/
         JLayeredPane layeredPane = new JLayeredPane();   
@@ -56,25 +53,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         JLabel backgroundLabel = new JLabel(ticon);
         backgroundLabel.setBounds(200, 0, ticon.getIconWidth(), ticon.getIconHeight());
         layeredPane.add(backgroundLabel, Integer.valueOf(0));
-
-        /*Following is process to create a card and manually add to scene. */
-        resize(.125, king);
-        JLabel kingLabel = new JLabel(king);
-        kingLabel.setBounds(700, 460, king.getIconWidth(), king.getIconHeight());  //can use x and y to give exact cords.
-        layeredPane.add(kingLabel, Integer.valueOf(1));
-
-        JLabel kingLabel2 = new JLabel(king);
-        kingLabel2.setBounds(670, 480, king.getIconWidth(), king.getIconHeight());
-        layeredPane.add(kingLabel2, Integer.valueOf(1));
-
-        JLabel kingLabel3 = new JLabel(king);
-        kingLabel3.setBounds(620, 143, king.getIconWidth(), king.getIconHeight());
-        layeredPane.add(kingLabel3, Integer.valueOf(1));
-
-        resize(.09, back);
-        JLabel backCard = new JLabel(back);
-        backCard.setBounds(700, 132, back.getIconWidth(), back.getIconHeight());
-        layeredPane.add(backCard, Integer.valueOf(1));
+        
         mainPanel.add(layeredPane);
 
         //creation of second panel for buttons/betting
@@ -99,18 +78,18 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         balanceAndBet.setOpaque(false);
 
 
-        this.debt = new JLabel("Debt: $5,000");
+        this.debt = new JLabel("Debt: $0");
         debt.setFont(new Font("serif", Font.CENTER_BASELINE, 24));
         debt.setForeground(new Color(139,0,35));
         debt.setOpaque(false);
 
-        this.balance = new JLabel("Balance: $1,000,000");
+        this.balance = new JLabel("Balance: $5,000");
         balance.setFont(new Font("serif", Font.CENTER_BASELINE, 24));
         balance.setForeground(new Color(202,151,74));
         balance.setOpaque(false);
         balanceAndBet.add(balance);
 
-        JLabel currentBet = new JLabel("Current Bet: $25,000");
+        JLabel currentBet = new JLabel("Current Bet: $0");
         currentBet.setFont(new Font("serif", Font.CENTER_BASELINE, 24));
         currentBet.setForeground(new Color(202,151,74));
         currentBet.setOpaque(false);
