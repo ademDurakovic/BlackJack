@@ -70,4 +70,8 @@ public class User{
             o.update();
         }
     }
+
+    public int getHandIndex(){
+        return this.handIndex;
+    }
 }

@@ -20,4 +20,12 @@ public class Controller implements ControllerInterface{
     {
         this.model.hit();
     }
+
+    public void userIncreasedBet(int bet){
+        this.model.increaseBet(bet);
+    }
+
+    public void userPlacedBet(){
+        this.model.placeBet();
+    }
 }
