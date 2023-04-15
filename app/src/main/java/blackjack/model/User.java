@@ -36,20 +36,12 @@ public class User{
         notifyObservers();
     }
 
-    public int hit(){
-        //generates a random number from 0 to 11
-        int cardToGet = cardGenerator.nextInt(12);
+    public void hit(){
+        notifyObservers();     
+    }
 
-        // adds the card to the array but +2 becuase of the cards deck difference
-        //this.playerHand[this.handIndex] = (cardToGet + 2);
-
-        //increment the hand index
-        this.handIndex++;
-
-        notifyObservers();
-
-        //returns the cards to get to the gui to make the card
-        return cardToGet;
+    public int pullRandomCard(){
+        return cardGenerator.nextInt(12);
     }
 
     public void doublDown(){
