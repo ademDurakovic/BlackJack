@@ -41,8 +41,8 @@ public class User{
     }
 
     public void hit(){
-        userHit = true;
         notifyObservers();     
+        userHit = true;
     }
 
     public int pullRandomCard(){
