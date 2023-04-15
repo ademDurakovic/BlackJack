@@ -133,7 +133,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         }
         if(model.didUserHit()){
             JLabel newCard3 = deck.pullCard(model.pullRandomCard());  //makes whole new card.
-            newCard3.setBounds(600, 400, 200, 200);
+            newCard3.setBounds(610, 360, 200, 200);
             layeredPane.add(newCard3, 0);
         }
 
