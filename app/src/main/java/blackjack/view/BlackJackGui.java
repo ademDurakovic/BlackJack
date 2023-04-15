@@ -116,15 +116,28 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         this.debt.setText("Debt: $" + String.valueOf(model.getDebt()));
         this.currentBet.setText("Current Bet: $" + String.valueOf(model.getCurrentBet()));
 
+        /*Inital dealing to the user currently. */
         if(model.betPlaced())
         {
             buttons.enableButtonsAfterBets();
             this.chips.disableAll();
-            JLabel newCard = deck.pullCard(model.pullRandomCard());  //makes whole new card.
 
-            newCard.setBounds(300, 300, 200, 200);
+            JLabel newCard = deck.pullCard(model.pullRandomCard());  //makes whole new card.
+            newCard.setBounds(550, 400, 200, 200);
             layeredPane.add(newCard, 0);
+
+            JLabel newCard2 = deck.pullCard(model.pullRandomCard());  //makes whole new card.
+            newCard2.setBounds(580, 380, 200, 200);
+            layeredPane.add(newCard2, 0);
+         //   model.setInitialBetPlaced(false);
         }
+        if(!model.didUserHit()){
+            JLabel newCard3 = deck.pullCard(model.pullRandomCard());  //makes whole new card.
+            newCard3.setBounds(600, 400, 200, 200);
+            layeredPane.add(newCard3, 0);
+        }
+
+        
     
     }
 

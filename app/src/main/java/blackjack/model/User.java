@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import blackjack.BlackJackObserver;
 
 public class User{
-    private int[] playerHand;
+    private ArrayList<Integer> playerHand;
     private int handIndex;
     private boolean isPlaying;
     private Random cardGenerator;
@@ -15,34 +15,42 @@ public class User{
     private int currentDebt;
     private int currentBet;
     private boolean initialBetPlaced;
+    private boolean userHit;
 
     public User(){
         initialBetPlaced = false;
         this.observers = new ArrayList<BlackJackObserver>();
-        this.playerHand = new int[0];
+        this.playerHand = new ArrayList<Integer>();
         this.currentBalance = 5000;
         this.handIndex = 0;
         this.isPlaying = true;
         this.cardGenerator = new Random();
         this.currentDebt = 0;
         this.currentBet = 0;
+        userHit = false;
     }
 
 
     public void initialDeal(){
-        hit();
-        hit();
         initialBetPlaced = true;
+        initialHit();
+    }
+
+    public void initialHit(){
         notifyObservers();
     }
 
     public void hit(){
+        userHit = true;
         notifyObservers();     
     }
 
     public int pullRandomCard(){
-        return cardGenerator.nextInt(10);
+        int num =  cardGenerator.nextInt(10);
+        playerHand.add(num+2);
+        return num;
     }
+
 
     public void doublDown(){
         // gives the user a card
@@ -102,6 +110,14 @@ public class User{
         {
             o.update();
         }
+    }
+
+    public void setInitialBetPlaced(boolean setter){
+        this.initialBetPlaced = setter;
+    }
+
+    public boolean didUserHit(){
+        return this.userHit;
     }
 
 
