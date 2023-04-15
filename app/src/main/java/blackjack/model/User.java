@@ -41,7 +41,7 @@ public class User{
     }
 
     public int pullRandomCard(){
-        return cardGenerator.nextInt(12);
+        return cardGenerator.nextInt(10);
     }
 
     public void doublDown(){
