@@ -128,7 +128,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
             int buttonIndex = button.getIndex();
 
             switch(buttonIndex){
-                //case 0: this.controller.userPlacedBet();
+                case 0: this.controller.userPlacedBet();
                 case 2: this.controller.userHit();
                         break;
                 default: break;
