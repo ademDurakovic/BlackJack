@@ -22,7 +22,29 @@ public class BlackJackButtons extends JPanel {
             this.buttons[i].setForeground(new Color(202,151,74));
             this.buttons[i].addActionListener(buttonClickListener);
 
+            if(i == 1 || i==2 || i==3 )
+            {
+                this.buttons[i].setEnabled(false);
+            }
+
             this.add(this.buttons[i]);
         }
+    }
+
+    public void disableAll()
+    {
+        for (BJButtons i: this.buttons)
+        {
+            i.setEnabled(false);
+        }
+    }
+
+    public void enableButtonsAfterBets()
+    {
+        for (BJButtons i: this.buttons)
+        {
+            i.setEnabled(true);
+        }
+        this.buttons[0].setEnabled(false);
     }
 }

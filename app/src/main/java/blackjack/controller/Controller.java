@@ -21,8 +21,8 @@ public class Controller implements ControllerInterface{
         this.model.hit();
     }
 
-    public void userIncreasedBet(int bet){
-        this.model.increaseBet(bet);
+    public void userIncreasedBet(int value){
+        this.model.increaseBet(value);
     }
 
     public void userPlacedBet(){

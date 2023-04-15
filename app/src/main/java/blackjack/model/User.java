@@ -14,8 +14,10 @@ public class User{
     private ArrayList<BlackJackObserver> observers;
     private int currentDebt;
     private int currentBet;
+    private boolean betsPlaced;
 
     public User(){
+        betsPlaced = false;
         this.observers = new ArrayList<BlackJackObserver>();
         this.playerHand = new int[0];
         this.currentBalance = 5000;
@@ -27,9 +29,10 @@ public class User{
     }
 
 
-    public void deal(){
+    public void initialDeal(){
         hit();
         hit();
+        betsPlaced = true;
         notifyObservers();
     }
 
@@ -58,22 +61,38 @@ public class User{
     }
 
     public void placeBet(){
-        this.deal();
+        this.initialDeal();
     }
 
     public void increaseBet(int bet){
 
-        if((bet + this.currentBet) < this.currentBalance){  //checks if user can afford bet.
+        if( bet <= this.currentBalance){  //checks if user can afford bet.
             this.currentBet += bet;
+            this.currentBalance -= bet;
         }
         else{
             System.out.println("You cannot afford this bet, visit gustavo.");
         }
+
+        notifyObservers();
     }
 
+    public boolean betPlaced() 
+    {
+        return this.betsPlaced;
+    }
     public int getBalance()
     {
         return this.currentBalance;
+    }
+
+    public int getDebt()
+    {
+        return this.currentDebt;
+    }
+
+    public int getCurrentBet() {
+        return this.currentBet;
     }
 
     public int getHandIndex(){

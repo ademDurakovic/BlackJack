@@ -19,6 +19,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
     private User model;
     private JLabel debt;
     private JLabel balance;
+    private JLabel currentBet;
     
 
     public BlackJackGui(Controller controller, User model){
@@ -89,7 +90,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         balance.setOpaque(false);
         balanceAndBet.add(balance);
 
-        JLabel currentBet = new JLabel("Current Bet: $0");
+        this.currentBet = new JLabel("Current Bet: $0");
         currentBet.setFont(new Font("serif", Font.CENTER_BASELINE, 24));
         currentBet.setForeground(new Color(202,151,74));
         currentBet.setOpaque(false);
@@ -108,6 +109,13 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
     @Override
     public void update() {
         this.balance.setText("Balance: $" + String.valueOf(model.getBalance()));
+        this.debt.setText("Debt: $" + String.valueOf(model.getDebt()));
+        this.currentBet.setText("Current Bet: $" + String.valueOf(model.getCurrentBet()));
+
+        if(model.betPlaced())
+        {
+            buttons.enableButtonsAfterBets();
+        }
     }
 
     @Override
@@ -120,10 +128,10 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
             if(button.getIndex() == 2)
             {
                 this.controller.userHit();
-            }
+            } 
         } else if (source instanceof ChipButton) {
             ChipButton button = (ChipButton)source;
-            System.out.println(button.getValue());
+            this.controller.userIncreasedBet(button.getValue());
         }
     }
 
