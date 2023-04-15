@@ -120,13 +120,12 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         {
             buttons.enableButtonsAfterBets();
             this.chips.disableAll();
-            
+            JLabel newCard = deck.pullCard(model.pullRandomCard());  //makes whole new card.
+
+            newCard.setBounds(300, 300, 200, 200);
+            layeredPane.add(newCard, 0);
         }
-
-       // JLabel newCard = deck.pullCard(model.pullRandomCard());  //makes whole new card.
-
-        //newCard.setBounds(100, 100, 200, 50);
-        //layeredPane.add(newCard, 0);
+    
     }
 
     @Override

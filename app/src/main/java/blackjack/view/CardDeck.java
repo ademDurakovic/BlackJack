@@ -67,7 +67,7 @@ public class CardDeck {
 
         public JLabel makeLabel(String pngFile){      
             ImageIcon tempIcon = new ImageIcon(classLoader.getResource(pngFile));
-            resize(0.5, tempIcon);
+            resize(0.15, tempIcon);
             JLabel returnLabel = new JLabel(tempIcon);
             return returnLabel;
         }
