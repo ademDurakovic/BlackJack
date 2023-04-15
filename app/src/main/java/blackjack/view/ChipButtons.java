@@ -22,4 +22,20 @@ public class ChipButtons extends JPanel{
             this.add(chips[i]);
         }
     }
+
+    public void disableAll()
+    {
+        for(ChipButton chip: this.chips)
+        {
+            chip.setEnabled(false);
+        }
+    }
+
+    public void enableAll()
+    {
+        for(ChipButton chip: this.chips)
+        {
+            chip.setEnabled(true);
+        }
+    }
 }

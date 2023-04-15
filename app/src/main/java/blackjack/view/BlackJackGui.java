@@ -22,6 +22,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
     private JLabel currentBet;
     private CardDeck deck;
     private JLayeredPane layeredPane;
+    private ChipButtons chips;
     
 
     public BlackJackGui(Controller controller, User model){
@@ -70,7 +71,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         buttons.setOpaque(false);
 
         //creates chips
-        ChipButtons chips = new ChipButtons(this);
+        this.chips = new ChipButtons(this);
         chips.setOpaque(false);
         secondPanel.add(chips);
         
@@ -118,6 +119,8 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         if(model.betPlaced())
         {
             buttons.enableButtonsAfterBets();
+            this.chips.disableAll();
+            
         }
 
        // JLabel newCard = deck.pullCard(model.pullRandomCard());  //makes whole new card.
