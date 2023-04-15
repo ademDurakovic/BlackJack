@@ -3,12 +3,18 @@
  */
 package blackjack;
 
-import blackjack.view.BlackJackGui;
-import blackjack.view.LoanShark;
+import blackjack.model.*;
+import blackjack.view.*;
+import blackjack.controller.*;
 
 public class App {
 
     public static void main(String[] args) {
-        BlackJackGui blackJackGui = new BlackJackGui();
+
+        User player = new User();
+
+        Controller controller = new Controller(player);
+        
+        //BlackJackGui blackJackGui = new BlackJackGui();
     }
 }

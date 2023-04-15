@@ -1,6 +1,10 @@
 package blackjack.view;
 
 import blackjack.BlackJackObserver;
+import blackjack.ControllerInterface;
+import blackjack.controller.*;
+import blackjack.model.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -10,10 +14,19 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
     JPanel mainPanel;
     ImageIcon ticon;
     JLabel imageLabel; 
+    private ControllerInterface controller;
     private BlackJackButtons buttons;
+    private User model;
+    private JLabel debt;
+    private JLabel balance;
     
 
-    public BlackJackGui(){
+    public BlackJackGui(Controller controller, User model){
+
+        this.controller = controller;
+        this.model = model;
+
+        this.model.register(this);
         mainFrame = new JFrame("BlackJack");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -86,12 +99,12 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         balanceAndBet.setOpaque(false);
 
 
-        JLabel debt = new JLabel("Debt: $5,000");
+        this.debt = new JLabel("Debt: $5,000");
         debt.setFont(new Font("serif", Font.CENTER_BASELINE, 24));
         debt.setForeground(new Color(139,0,35));
         debt.setOpaque(false);
 
-        JLabel balance = new JLabel("Balance: $1,000,000");
+        this.balance = new JLabel("Balance: $1,000,000");
         balance.setFont(new Font("serif", Font.CENTER_BASELINE, 24));
         balance.setForeground(new Color(202,151,74));
         balance.setOpaque(false);
@@ -115,7 +128,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
 
     @Override
     public void update() {
-
+        this.balance.setText("Balance: $" + String.valueOf(model.getBalance()));
     }
 
     @Override
@@ -125,6 +138,10 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         if (source instanceof BJButtons){
             BJButtons button = (BJButtons)source;
             System.out.println(button.getIndex());
+            if(button.getIndex() == 2)
+            {
+                this.controller.userHit();
+            }
         } else if (source instanceof ChipButton) {
             ChipButton button = (ChipButton)source;
             System.out.println(button.getValue());
