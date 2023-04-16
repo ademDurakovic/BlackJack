@@ -28,4 +28,8 @@ public class Controller implements ControllerInterface{
     public void userPlacedBet(){
         this.model.placeBet();
     }
+
+    public void userStand(){
+        this.model.stand();
+    }
 }

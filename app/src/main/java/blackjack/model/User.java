@@ -109,6 +109,10 @@ public class User{
         this.currentTotal = this.addDeck();
     }
 
+    public void stand(){
+        this.isPlaying = false;
+    }
+
     public int addDeck() {
         int total = 0;
         for (int i: this.playerHand)
@@ -157,6 +161,4 @@ public class User{
     public boolean didUserHit(){
         return this.userHit;
     }
-
-
 }
