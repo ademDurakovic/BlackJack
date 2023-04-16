@@ -16,6 +16,7 @@ public class User{
     private int currentBet;
     private boolean initialBetPlaced;
     private boolean userHit;
+    private int currentTotal;
 
     public User(){
         initialBetPlaced = false;
@@ -28,6 +29,7 @@ public class User{
         this.currentDebt = 0;
         this.currentBet = 0;
         userHit = false;
+        currentTotal = 0;
     }
 
 
@@ -48,6 +50,7 @@ public class User{
     public int pullRandomCard(){
         int num =  cardGenerator.nextInt(10);
         playerHand.add(num+2);
+        currentTotal = this.addDeck();
         return num;
     }
 
@@ -88,9 +91,19 @@ public class User{
     }
 
     public boolean isUserAbleToHit(){
-        int currentTotal = this.addDeck();
-
+        if(this.currentTotal > 21){
+            this.aceCase();
+        }
         return currentTotal < 21;
+    }
+    public void aceCase(){
+        for(int i = 0; i < playerHand.size(); i++){
+            if(playerHand.get(i) == 11){
+                playerHand.set(i, 1);
+                break;
+            }
+        }
+        this.currentTotal = this.addDeck();
     }
 
     public int addDeck() {
