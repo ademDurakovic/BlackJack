@@ -142,6 +142,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
             this.cardCoordinateY -= 5;
             model.setBetPlaced(false);
         }
+
     
     }
 
@@ -158,6 +159,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
                         break;
                 case 2: this.controller.userHit();
                         break;
+        
                 default: break;
             }
         } else if (source instanceof ChipButton) {

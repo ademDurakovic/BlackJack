@@ -40,6 +40,7 @@ public class User{
 
     public void initialHit(){
         notifyObservers();
+
     }
 
     public void hit(){
@@ -69,7 +70,9 @@ public class User{
     }
 
     public void placeBet(){
-        this.initialDeal();
+        if(currentBet > 0){
+            this.initialDeal();
+        }
     }
 
     public void increaseBet(int bet){
