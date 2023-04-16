@@ -14,6 +14,8 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
     JPanel mainPanel;
     ImageIcon ticon;
     JLabel imageLabel; 
+    private int cardCoordinateX;
+    private int cardCoordinateY;
     private ControllerInterface controller;
     private BlackJackButtons buttons;
     private User model;
@@ -26,7 +28,8 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
     
 
     public BlackJackGui(Controller controller, User model){
-
+        this.cardCoordinateX = 610;
+        this.cardCoordinateY = 390;
         this.controller = controller;
         this.model = model;
         deck = new CardDeck();  //creation of cards.
@@ -127,14 +130,17 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
             layeredPane.add(newCard, 0);
 
             JLabel newCard2 = deck.pullCard(model.pullRandomCard());  //makes whole new card.
-            newCard2.setBounds(580, 380, 200, 200);
+            newCard2.setBounds(580, 395, 200, 200);
             layeredPane.add(newCard2, 0);
             model.setInitialBetPlaced(false);
         }
-        if(model.didUserHit()){
+        if(model.didUserHit() && model.isUserAbleToHit()){
             JLabel newCard3 = deck.pullCard(model.pullRandomCard());  //makes whole new card.
-            newCard3.setBounds(610, 360, 200, 200);
+            newCard3.setBounds(this.cardCoordinateX, this.cardCoordinateY, 200, 200);
             layeredPane.add(newCard3, 0);
+            this.cardCoordinateX += 30;
+            this.cardCoordinateY -= 5;
+            model.setBetPlaced(false);
         }
 
         
@@ -147,11 +153,11 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         Object source = event.getSource();
         if (source instanceof BJButtons){
             BJButtons button = (BJButtons)source;
-            System.out.println(button.getIndex());
             int buttonIndex = button.getIndex();
 
             switch(buttonIndex){
                 case 0: this.controller.userPlacedBet();
+                        break;
                 case 2: this.controller.userHit();
                         break;
                 default: break;

@@ -41,8 +41,8 @@ public class User{
     }
 
     public void hit(){
-        notifyObservers();     
         userHit = true;
+        notifyObservers();     
     }
 
     public int pullRandomCard(){
@@ -58,6 +58,11 @@ public class User{
 
         // after doubling the players turn is done
         this.isPlaying = false;
+    }
+
+    public void setBetPlaced(boolean bet)
+    {
+        this.userHit = bet;
     }
 
     public void placeBet(){
@@ -81,6 +86,23 @@ public class User{
     {
         return this.initialBetPlaced;
     }
+
+    public boolean isUserAbleToHit(){
+        int currentTotal = this.addDeck();
+
+        return currentTotal < 21;
+    }
+
+    public int addDeck() {
+        int total = 0;
+        for (int i: this.playerHand)
+        {
+            total += i;
+        }
+
+        return total;
+    }
+
     public int getBalance()
     {
         return this.currentBalance;
