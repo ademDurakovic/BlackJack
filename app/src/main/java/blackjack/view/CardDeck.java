@@ -58,6 +58,13 @@ public class CardDeck {
             
         }
 
+        public JLabel getFlippedCard(){
+            ImageIcon tempIcon = new ImageIcon(classLoader.getResource("FlippedCard.png"));
+            resize(0.105, tempIcon);
+            JLabel flipped = new JLabel(tempIcon);
+            return flipped;
+        }
+
         public JLabel pullCard(int cardValue){
             int realIndex = cardValue;
             String [] potentialCards = cardDeck.get(realIndex);

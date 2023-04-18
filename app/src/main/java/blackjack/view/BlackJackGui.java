@@ -125,6 +125,14 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
             buttons.enableButtonsAfterBets();
             this.chips.disableAll();
 
+            JLabel flippedCard = deck.getFlippedCard();
+            flippedCard.setBounds(550, 100, 200, 200);
+            layeredPane.add(flippedCard, 0);
+
+            JLabel dealerCard = deck.pullCard(model.pullRandomCard());  //makes whole new card.
+            dealerCard.setBounds(650, 100, 200, 200);
+            layeredPane.add(dealerCard, 0);
+
             JLabel newCard = deck.pullCard(model.pullRandomCard());  //makes whole new card.
             newCard.setBounds(550, 400, 200, 200);
             layeredPane.add(newCard, 0);
