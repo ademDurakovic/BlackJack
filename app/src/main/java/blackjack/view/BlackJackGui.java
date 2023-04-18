@@ -129,7 +129,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
             flippedCard.setBounds(550, 100, 200, 200);
             layeredPane.add(flippedCard, 0);
 
-            JLabel dealerCard = deck.pullCard(model.pullRandomCard());  //makes whole new card.
+            JLabel dealerCard = deck.pullCard(9); 
             dealerCard.setBounds(650, 100, 200, 200);
             layeredPane.add(dealerCard, 0);
 
