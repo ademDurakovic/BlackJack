@@ -18,7 +18,9 @@ public class ChipButton extends JButton {
         this.png = new ImageIcon(classLoader.getResource(image));
         resize(.15, this.png);
         this.setIcon(this.png);
-        this.setBackground(new Color(255,255,255));
+        this.setBorderPainted(false);
+        this.setBackground(new Color(151,42,39));
+        this.setOpaque(true);
     }
 
     public int getValue() {
