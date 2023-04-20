@@ -4,7 +4,6 @@
 package blackjack;
 
 import blackjack.model.*;
-import blackjack.view.*;
 import blackjack.controller.*;
 
 public class App {

@@ -2,7 +2,6 @@ package blackjack.view;
 
 import blackjack.BlackJackObserver;
 import blackjack.ControllerInterface;
-import blackjack.controller.*;
 import blackjack.model.*;
 
 import java.awt.*;
@@ -27,8 +26,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
     private ChipButtons chips;
     
 
-    public BlackJackGui(Controller controller, User model){
-        /*Starting coordinates for cards */
+    public BlackJackGui(ControllerInterface controller, User model){
         this.cardCoordinateX = 610;
         this.cardCoordinateY = 390;
         this.controller = controller;
