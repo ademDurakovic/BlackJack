@@ -69,7 +69,8 @@ public class User{
 
         }
     }
-    public void doublDown(){
+    
+    public void doubleDown(){
         // gives the user a card
         hit();
 
