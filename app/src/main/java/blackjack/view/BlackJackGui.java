@@ -27,7 +27,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
     private ChipButtons chips;
     
 
-    public BlackJackGui(Controller controller, User model){
+    public BlackJackGui(ControllerInterface controller, User model){
         this.cardCoordinateX = 610;
         this.cardCoordinateY = 390;
         this.controller = controller;
