@@ -149,8 +149,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
             this.cardCoordinateX += 30;
             this.cardCoordinateY -= 5;
             model.setBetPlaced(false);
-        }
-        if(model.isStanding()){
+        }else if(model.isStanding()){
             buttons.disableAll();
         }
 

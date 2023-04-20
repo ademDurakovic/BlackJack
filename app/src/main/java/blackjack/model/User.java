@@ -30,6 +30,7 @@ public class User{
         this.currentDebt = 0;
         this.currentBet = 0;
         userHit = false;
+        this.isStanding = false;
         currentTotal = 0;
     }
 
@@ -53,6 +54,10 @@ public class User{
         int num =  cardGenerator.nextInt(10);
         playerHand.add(num+2);
         currentTotal = this.addDeck();
+
+        if(currentTotal > 21) {
+            this.aceCase();
+        }
         didUserBust();
         System.out.println(currentTotal);
         return num;
