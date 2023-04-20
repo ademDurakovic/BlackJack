@@ -174,10 +174,12 @@ public class User{
         }
     }
 
+    // returns a boolean whether or not the user has clicked "hit"
     public boolean didUserHit(){
         return this.userHit;
     }
 
+    // returns a boolean on whether or not the user chose to stand
     public boolean isStanding(){
         return isStanding;
     }

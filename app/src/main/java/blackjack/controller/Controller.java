@@ -16,19 +16,23 @@ public class Controller implements ControllerInterface{
         this.view = new BlackJackGui(this, model);
     }
 
+    // method to hit (draw new card)
     public void userHit()
     {
         this.model.hit();
     }
 
+    // increase bet amount function
     public void userIncreasedBet(int value){
         this.model.increaseBet(value);
     }
 
+    // tells the model the player placed the bet
     public void userPlacedBet(){
         this.model.placeBet();
     }
 
+    //tells the model the player stood
     public void userStand(){
         this.model.stand();
     }

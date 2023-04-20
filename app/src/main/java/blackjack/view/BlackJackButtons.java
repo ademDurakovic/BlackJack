@@ -22,6 +22,7 @@ public class BlackJackButtons extends JPanel {
             this.buttons[i].setForeground(new Color(202,151,74));
             this.buttons[i].addActionListener(buttonClickListener);
 
+            // the logic behind is that at the start, the user can only place a bet or go to the loan shark
             if(i == 1 || i==2 || i==3 )
             {
                 this.buttons[i].setEnabled(false);
@@ -31,6 +32,7 @@ public class BlackJackButtons extends JPanel {
         }
     }
 
+    //disables all buttons, used for when the player stands
     public void disableAll()
     {
         for (BJButtons i: this.buttons)
@@ -39,6 +41,7 @@ public class BlackJackButtons extends JPanel {
         }
     }
 
+    // disables the bet button after bet is placed and enables every other buttons
     public void enableButtonsAfterBets()
     {
         for (BJButtons i: this.buttons)

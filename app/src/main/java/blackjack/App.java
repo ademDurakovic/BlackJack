@@ -10,8 +10,8 @@ public class App {
 
     public static void main(String[] args) {
 
-        User player = new User();
+        User player = new User(); // model
 
-        Controller controller = new Controller(player);
+        Controller controller = new Controller(player); //controller
     }
 }

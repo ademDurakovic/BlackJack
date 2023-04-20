@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Random;
 
+/* Jframe and screen for the loan shark that is to be implemented later */
 public class LoanShark {
     public JFrame mainFrame;
     public JPanel mainPanel;
