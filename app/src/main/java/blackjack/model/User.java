@@ -20,7 +20,8 @@ public class User{
     private boolean isStanding;
 
     public User(){
-        initialBetPlaced = false;
+        /*Initial Variables. */
+        this.initialBetPlaced = false;
         this.observers = new ArrayList<BlackJackObserver>();
         this.playerHand = new ArrayList<Integer>();
         this.currentBalance = 5000;
@@ -29,19 +30,19 @@ public class User{
         this.cardGenerator = new Random();
         this.currentDebt = 0;
         this.currentBet = 0;
-        userHit = false;
+        this.userHit = false;
         this.isStanding = false;
         currentTotal = 0;
     }
 
 
     public void initialDeal(){
-        initialBetPlaced = true;
+        initialBetPlaced = true;  //bet has been placed, and inital hit takes place.
         initialHit();
     }
 
     public void initialHit(){
-        notifyObservers();
+        notifyObservers(); //random cards are pulled at update.
 
     }
 
@@ -51,42 +52,41 @@ public class User{
     }
 
     public int pullRandomCard(){
-        int num =  cardGenerator.nextInt(10);
-        playerHand.add(num+2);
+        int num =  cardGenerator.nextInt(10);  //grabs random value, deck takes care of suite.
+        playerHand.add(num+2);       //since there is no 0 card we do a +2 increment
         currentTotal = this.addDeck();
-        if(currentTotal > 21) {
+        if(currentTotal > 21) {   // we want to see if the user busts so that we can disable buttons. The currentTotal can change if they have an ace so we must check that.
             this.aceCase();
         }
         didUserBust();
         System.out.println(currentTotal);
         return num;
     }
-
+    /*checks score to see if it is 21 or over, if so we stand and the dealer will take control. */
     public void didUserBust(){
         if (currentTotal >= 21){
             this.stand();
         }
     }
-    
+    /*COMING IN LATER DELIVERABLE. */
     public void doubleDown(){
         // gives the user a card
         hit();
-
         // after doubling the players turn is done
         this.isPlaying = false;
     }
-
+    /* sets the bet.*/
     public void setBetPlaced(boolean bet)
     {
         this.userHit = bet;
     }
-
+    /*if the user has made the bet we can deal. */
     public void placeBet(){
         if(currentBet > 0){
             this.initialDeal();
         }
     }
-
+    /*we look to see if the user can afford to increase their bet when they click a chip. */
     public void increaseBet(int bet){
 
         if( bet <= this.currentBalance){  //checks if user can afford bet.
@@ -105,12 +105,14 @@ public class User{
         return this.initialBetPlaced;
     }
 
+    /*makes sure the user can get more cards. */
     public boolean isUserAbleToHit(){
         if(this.currentTotal > 21){
             this.aceCase();
         }
         return currentTotal < 21;
     }
+    /*Checks for aces in deck if they are over 21, if so we change the first 11 value to a 1. */
     public void aceCase(){
         for(int i = 0; i < playerHand.size(); i++){
             if(playerHand.get(i) == 11){
@@ -120,13 +122,13 @@ public class User{
         }
         this.currentTotal = this.addDeck();
     }
-
+    /*user does not get a card and buttons will be disabled in GUI */
     public void stand(){
         this.isPlaying = false;
         this.isStanding = true;
         notifyObservers();
     }
-
+    /*Finds total sum of the users cards */
     public int addDeck() {
         int total = 0;
         for (int i: this.playerHand)
@@ -136,7 +138,11 @@ public class User{
 
         return total;
     }
-
+    /*Sets inital bet */
+    public void setInitialBetPlaced(boolean setter){
+        this.initialBetPlaced = setter;
+    }
+/*Getters: */
     public int getBalance()
     {
         return this.currentBalance;
@@ -166,10 +172,6 @@ public class User{
         {
             o.update();
         }
-    }
-
-    public void setInitialBetPlaced(boolean setter){
-        this.initialBetPlaced = setter;
     }
 
     public boolean didUserHit(){

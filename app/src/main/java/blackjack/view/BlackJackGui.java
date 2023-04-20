@@ -28,6 +28,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
     
 
     public BlackJackGui(Controller controller, User model){
+        /*Starting coordinates for cards */
         this.cardCoordinateX = 610;
         this.cardCoordinateY = 390;
         this.controller = controller;
@@ -38,12 +39,9 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         mainFrame = new JFrame("BlackJack");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //used to get screen dimensions
+        //used to get screen dimensions (WILL USE LATER ON.)
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension screen = toolkit.getScreenSize();
-
-        System.out.println("Width: "+ screen.getWidth());
-        System.out.println("height: "+ screen.getHeight());
 
         mainPanel = new JPanel();
         mainPanel.setPreferredSize(new Dimension(1440,900));
@@ -53,7 +51,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         mainFrame.add(mainPanel);
       
         ClassLoader classLoader = getClass().getClassLoader();
-        ImageIcon ticon = new ImageIcon(classLoader.getResource("blackjack_table.png"));
+        ImageIcon ticon = new ImageIcon(classLoader.getResource("blackjack_table.png"));  //blackJack table
 
         /* creation pf layered pane with table backround*/
         layeredPane = new JLayeredPane();   
@@ -85,7 +83,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         balanceAndBet.setAlignmentY(Component.CENTER_ALIGNMENT);
         balanceAndBet.setOpaque(false);
 
-
+        /*Debt, Balance, and current bet to be displayed to the user: */
         this.debt = new JLabel("Debt: $0");
         debt.setFont(new Font("serif", Font.CENTER_BASELINE, 24));
         debt.setForeground(new Color(139,0,35));
@@ -164,6 +162,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
             BJButtons button = (BJButtons)source;
             int buttonIndex = button.getIndex();
 
+            /*Switch case based on which button the user clicked: */
             switch(buttonIndex){
                 case 0: this.controller.userPlacedBet();
                         break;
