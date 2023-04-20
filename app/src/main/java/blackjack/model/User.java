@@ -17,6 +17,7 @@ public class User{
     private boolean initialBetPlaced;
     private boolean userHit;
     private int currentTotal;
+    private boolean isStanding;
 
     public User(){
         initialBetPlaced = false;
@@ -52,10 +53,17 @@ public class User{
         int num =  cardGenerator.nextInt(10);
         playerHand.add(num+2);
         currentTotal = this.addDeck();
+        didUserBust();
+        System.out.println(currentTotal);
         return num;
     }
 
+    public void didUserBust(){
+        if (currentTotal >= 21){
+            this.stand();
 
+        }
+    }
     public void doublDown(){
         // gives the user a card
         hit();
@@ -111,6 +119,8 @@ public class User{
 
     public void stand(){
         this.isPlaying = false;
+        this.isStanding = true;
+        notifyObservers();
     }
 
     public int addDeck() {
@@ -161,4 +171,10 @@ public class User{
     public boolean didUserHit(){
         return this.userHit;
     }
+
+    public boolean isStanding(){
+        return isStanding;
+    }
+
+    
 }
