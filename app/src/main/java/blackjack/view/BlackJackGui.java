@@ -2,7 +2,6 @@ package blackjack.view;
 
 import blackjack.BlackJackObserver;
 import blackjack.ControllerInterface;
-import blackjack.controller.*;
 import blackjack.model.*;
 
 import java.awt.*;
