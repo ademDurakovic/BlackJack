@@ -54,7 +54,6 @@ public class User{
         int num =  cardGenerator.nextInt(10);
         playerHand.add(num+2);
         currentTotal = this.addDeck();
-
         if(currentTotal > 21) {
             this.aceCase();
         }
@@ -66,7 +65,6 @@ public class User{
     public void didUserBust(){
         if (currentTotal >= 21){
             this.stand();
-
         }
     }
     

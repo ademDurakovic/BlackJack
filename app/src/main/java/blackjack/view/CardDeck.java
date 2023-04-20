@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class CardDeck {
-    //    public final String[] IMAGE_PATHS = {
-      //      "ClubAce.png", "DiamondAce.png", "HeartAce.png", "SpadeAce.png"
-        //};
         private ClassLoader classLoader = getClass().getClassLoader();  //class loader to load .pnng
         private final String[] suits = {"club", "spade", "diamond", "heart"};  //array of suits so when we call randInt(5) we pick a random suit from here
 
@@ -32,9 +29,6 @@ public class CardDeck {
 
 
         //currnet card PNG dealer and user.
-
-    
-
         private ArrayList<String []> cardDeck = new ArrayList<String []>();
         Random rand;
 
@@ -42,8 +36,6 @@ public class CardDeck {
         public CardDeck(){
 
             /*Adds each array to the arrayList. Each array holds Pngs of the images. */
-
-           
             cardDeck.add(two_cards);  //index 0 
             cardDeck.add(three_cards);
             cardDeck.add(four_cards);
@@ -60,7 +52,7 @@ public class CardDeck {
 
         public JLabel getFlippedCard(){
             ImageIcon tempIcon = new ImageIcon(classLoader.getResource("FlippedCard.png"));
-            resize(0.105, tempIcon);
+            ImageResizer.resize(0.105, tempIcon);
             JLabel flipped = new JLabel(tempIcon);
             return flipped;
         }
@@ -74,21 +66,9 @@ public class CardDeck {
 
         public JLabel makeLabel(String pngFile){      
             ImageIcon tempIcon = new ImageIcon(classLoader.getResource(pngFile));
-            resize(0.15, tempIcon);
+            ImageResizer.resize(0.15, tempIcon);
             JLabel returnLabel = new JLabel(tempIcon);
             return returnLabel;
         }
-
-        public void resize(double scale, ImageIcon icon)
-        {
-           int height = icon.getIconHeight();
-           int width = icon.getIconWidth();
-           
-           height = (int)(height * scale);
-           width = (int)(width * scale);
-           Image image = icon.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
-           icon.setImage(image);
-        }
-
 
 }

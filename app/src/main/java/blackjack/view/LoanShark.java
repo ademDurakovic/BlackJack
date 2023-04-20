@@ -15,7 +15,6 @@ public class LoanShark {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         mainPanel = new JPanel();
-        //mainPanel.setPreferredSize(new Dimension(1000,625));
         BoxLayout layout = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);  //top down
         mainPanel.setLayout(layout);
         mainPanel.setBackground(new Color(151,42,39));
@@ -25,7 +24,7 @@ public class LoanShark {
 
         ClassLoader classLoader = getClass().getClassLoader();
         ImageIcon sharkIcon = new ImageIcon(classLoader.getResource("LoanShark.png"));
-        resize(0.35, sharkIcon);
+        ImageResizer.resize(0.35, sharkIcon);
         JLabel sharkLabel = new JLabel(sharkIcon);
         sharkLabel.setBounds(360, 320, sharkIcon.getIconWidth(), sharkIcon.getIconHeight());
 
@@ -73,16 +72,4 @@ public class LoanShark {
 
 
     }
-
-    public void resize(double scale, ImageIcon icon)
-   {
-      int height = icon.getIconHeight();
-      int width = icon.getIconWidth();
-      
-      height = (int)(height * scale);
-      width = (int)(width * scale);
-      Image image = icon.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
-      icon.setImage(image);
-   }
-
 }

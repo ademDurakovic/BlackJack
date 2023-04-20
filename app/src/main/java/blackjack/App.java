@@ -14,7 +14,5 @@ public class App {
         User player = new User();
 
         Controller controller = new Controller(player);
-        
-        //BlackJackGui blackJackGui = new BlackJackGui();
     }
 }
