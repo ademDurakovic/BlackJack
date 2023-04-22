@@ -5,22 +5,22 @@ import blackjack.BlackJackObserver;
 import java.util.Random;
 import java.util.ArrayList;
 
-import blackjack.BlackJackObserver;
-
 public class Dealer {
     private ArrayList<BlackJackObserver> observers;
     private boolean initalDeal = false;
     private Random cardGenerator;
     private ArrayList<Integer> dealerHand;
     private int dealerTotal;
-    private boolean delaerIsHitting; // will be used in dealerPanel to se eif hes hitting 
+    private boolean doneHitting;
+    private boolean dealerIsHitting; // will be used in dealerPanel to see if hes hitting 
 
     public Dealer(){
         cardGenerator = new Random();
         dealerHand = new ArrayList<Integer>(); 
         observers = new ArrayList<BlackJackObserver>();
         dealerTotal = 0; 
-        delaerIsHitting = false; //we must wait till user clicks stand for dealer to hit.
+        dealerIsHitting = false; //we must wait till user clicks stand for dealer to hit.
+        doneHitting = false;
     }
 
     /*Should call this when dealer places bet giving the dealer it's inital card. */
@@ -47,7 +47,7 @@ public class Dealer {
 
     /*THIS IS CALLED WHEN PLAYER STANDS. */
     public void startDrawing(){
-        this.delaerIsHitting = true;
+        this.dealerIsHitting = true;
         this.aceCase();
         dealerTotal = this.addDeck();  //making sure we get most recent total of dealer deck.
         while(dealerTotal < 17){
@@ -56,7 +56,10 @@ public class Dealer {
             this.aceCase();  //checks for aces
             dealerTotal = this.addDeck();
         }
-        this.delaerIsHitting = false;
+        this.doneHitting = true;
+        this.dealerIsHitting = false;
+        notifyObservers();
+
     }
 
     public int addDeck() {
@@ -87,8 +90,11 @@ public class Dealer {
         }
     }
 
+    public boolean isDone(){
+        return this.doneHitting;
+    }
     public boolean getDealerHitting(){
-        return delaerIsHitting;
+        return dealerIsHitting;
     }
     public boolean isInitalDealt(){
         return initalDeal;
@@ -96,5 +102,9 @@ public class Dealer {
 
     public void setInitalDealt(boolean setter){
         initalDeal = true;
+    }
+
+    public int getHand() {
+        return this.dealerTotal;
     }
 }

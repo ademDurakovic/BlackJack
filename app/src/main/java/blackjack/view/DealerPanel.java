@@ -10,14 +10,18 @@ import blackjack.model.*;
 public class DealerPanel extends JLayeredPane implements BlackJackObserver {
     private Dealer dealer;
     private CardDeck deck;
+    private Table table;
     private JLabel flippedCard;
+    private ControllerInterface controller;
     private int xCord = 100;
     private int yCord = 15;
 
 
-    public DealerPanel(Dealer dealer){
+    public DealerPanel(Dealer dealer, Table table, ControllerInterface controller){
         this.dealer = dealer;
-        dealer.register(this);  //Dealer Panel now will get upddates from Dealer class.
+        this.table = table;
+        this.controller = controller;
+        dealer.register(this);  //Dealer Panel now will get updates from Dealer class.
         /*We will use a flow layout so cards will just show from left to right. */
         this.setPreferredSize(new Dimension(300, 400));
 
@@ -29,11 +33,11 @@ public class DealerPanel extends JLayeredPane implements BlackJackObserver {
 
     public void update(){
         
-        /*Keep adding cards, the model will take care of whenevrt the dealer goes over 17. */
+        /*Keep adding cards, the model will take care of whenever the dealer goes over 17. */
         if(dealer.getDealerHitting()){
-            /*Incrementing cords. */
-            xCord += 25;
-            yCord += 15;
+            /*Incrementing cards. */
+            xCord += 10;
+            yCord += 10;
             this.remove(flippedCard);
             JLabel newCard = deck.pullCard(dealer.pullRandomCard());  //makes whole new card.
             newCard.setBounds(xCord , yCord, 200, 200);
@@ -44,14 +48,16 @@ public class DealerPanel extends JLayeredPane implements BlackJackObserver {
         /*triggered when user clicks bet.  */
         else if (dealer.isInitalDealt() == false){
             this.add(flippedCard, 0);
-            xCord += 25;
-            yCord += 15;
+            xCord += 10;
+            yCord += 10;
             JLabel firstCard = deck.pullCard(dealer.pullRandomCard());
             firstCard.setBounds(xCord, yCord, 200, 200);
             this.add(firstCard, 0);
             dealer.setInitalDealt(true);
             this.revalidate(); // validate the layout to update the display
             this.repaint(); // repaint the panel to ensure that the new card is displayed
+        }else if (dealer.isDone()) {
+            controller.getWinner();
         }
     }
     

@@ -5,4 +5,5 @@ public interface ControllerInterface {
     public void userIncreasedBet(int value);
     public void userPlacedBet();
     public void userStand();
+    public void getWinner();
 }

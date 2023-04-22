@@ -9,13 +9,15 @@ public class Controller implements ControllerInterface{
     private User model;
     private BlackJackGui view;
     private Dealer dealer;
+    private Table table;
     
-    public Controller(User model, Dealer dealer)
+    public Controller(User model, Dealer dealer, Table table)
     {
         this.model = model;
         this.dealer = dealer;
+        this.table = table;
 
-        this.view = new BlackJackGui(this, model, dealer);
+        this.view = new BlackJackGui(this, model, dealer, table);
     }
 
     // method to hit (draw new card)
@@ -42,5 +44,9 @@ public class Controller implements ControllerInterface{
         System.out.println("HERE");
         this.dealer.startDrawing();
         System.out.println("HERE2");
+    }
+
+    public void getWinner() {
+        this.table.checkWinner();
     }
 }

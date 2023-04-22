@@ -12,7 +12,8 @@ public class App {
 
         User player = new User(); // model
         Dealer dealer = new Dealer();
+        Table table = new Table(dealer, player);
 
-        Controller controller = new Controller(player, dealer); //controller
+        Controller controller = new Controller(player, dealer, table); //controller
     }
 }

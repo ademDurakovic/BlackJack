@@ -142,7 +142,39 @@ public class User{
     public void setInitialBetPlaced(boolean setter){
         this.initialBetPlaced = setter;
     }
+
+    // betting situations
+    public void userWon() {
+        this.currentBalance += (currentBet * 2);
+        this.currentBet = 0;
+        this.currentTotal = 0;
+        this.isPlaying = true;
+        this.initialBetPlaced = false;
+        notifyObservers();
+    }
+
+    public void userLost() {
+        this.currentBet = 0;
+        this.currentTotal = 0;
+        this.isPlaying = true;
+        this.initialBetPlaced = false;
+        notifyObservers();
+    }
+
+    public void userDraw() {
+        this.currentBalance += currentBet;
+        this.currentBet = 0;
+        this.currentTotal = 0;
+        this.isPlaying = true;
+        this.initialBetPlaced = false;
+        notifyObservers();
+    }
 /*Getters: */
+
+    public int getHand() {
+        return this.currentTotal;
+    }
+
     public int getBalance()
     {
         return this.currentBalance;

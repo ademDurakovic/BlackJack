@@ -25,17 +25,18 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
     private JLayeredPane layeredPane;
     private ChipButtons chips;
     private Dealer dealer; //dealer model class
-    DealerPanel dealerPanel;
+    private Table table;
+    private DealerPanel dealerPanel;
     
 
-    public BlackJackGui(ControllerInterface controller, User model, Dealer dealer){
+    public BlackJackGui(ControllerInterface controller, User model, Dealer dealer, Table table){
         this.cardCoordinateX = 610;
         this.cardCoordinateY = 390;
         this.controller = controller;
         this.model = model;
         this.dealer = dealer;
         deck = new CardDeck();  //creation of cards.
-
+        this.table = table; // table model, keeps track of winner
         this.model.register(this);
         mainFrame = new JFrame("BlackJack");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,7 +64,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         
         mainPanel.add(layeredPane);
 
-        dealerPanel = new DealerPanel(dealer);
+        dealerPanel = new DealerPanel(dealer, table, this.controller);
         dealerPanel.setBounds(cardCoordinateX - 150, 85, 600, 300);
         layeredPane.add(dealerPanel, 0);
 
@@ -149,7 +150,6 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         }else if(model.isStanding()){
             buttons.disableAll();
         }
-
     
     }
 
