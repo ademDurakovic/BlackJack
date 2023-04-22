@@ -41,6 +41,15 @@ public class BlackJackButtons extends JPanel {
         }
     }
 
+
+    public void enableAll()
+    {
+        for (BJButtons i: this.buttons)
+        {
+            i.setEnabled(true);
+        }
+    }
+
     // disables the bet button after bet is placed and enables every other buttons
     public void enableButtonsAfterBets()
     {

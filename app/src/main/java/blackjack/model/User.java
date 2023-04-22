@@ -18,6 +18,10 @@ public class User{
     private boolean userHit;
     private int currentTotal;
     private boolean isStanding;
+    public boolean userWon = false;
+    public boolean userLost = false;
+    public boolean userDrew = false;
+
 
     public User(){
         /*Initial Variables. */
@@ -147,25 +151,34 @@ public class User{
     public void userWon() {
         this.currentBalance += (currentBet * 2);
         this.currentBet = 0;
+        userWon= true;
+        System.out.println("userWon");
         newGame();
     }
 
     public void userLost() {
         this.currentBet = 0;
         notifyObservers();
+        userLost= true;
+        System.out.println("userLost");
         newGame();
     }
 
     public void userDraw() {
         this.currentBalance += currentBet;
         this.currentBet = 0;
-        notifyObservers();
+        userDrew = true;
+        
+        System.out.println("UserDrew");
         newGame();
     }
 
     public void newGame() {
         this.currentTotal = 0;
         this.initialBetPlaced = false;
+        isStanding = false;
+        playerHand.clear();
+        System.out.println("newGame");
         notifyObservers();
     }
 /*Getters: */

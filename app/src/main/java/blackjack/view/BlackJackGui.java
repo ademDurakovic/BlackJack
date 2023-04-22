@@ -150,6 +150,11 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         }else if(model.isStanding()){
             buttons.disableAll();
         }
+        else if(model.userLost || model.userDrew || model.userWon){
+            System.out.println("HERE5");
+            buttons.enableAll();
+            chips.enableAll();
+        }
     
     }
 
