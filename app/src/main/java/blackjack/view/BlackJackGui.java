@@ -24,13 +24,15 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
     private CardDeck deck;
     private JLayeredPane layeredPane;
     private ChipButtons chips;
+    private Dealer dealer; //dealer model class
     
 
-    public BlackJackGui(ControllerInterface controller, User model){
+    public BlackJackGui(ControllerInterface controller, User model, Dealer dealer){
         this.cardCoordinateX = 610;
         this.cardCoordinateY = 390;
         this.controller = controller;
         this.model = model;
+        this.dealer = dealer;
         deck = new CardDeck();  //creation of cards.
 
         this.model.register(this);
@@ -59,6 +61,10 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         layeredPane.add(backgroundLabel, Integer.valueOf(0));
         
         mainPanel.add(layeredPane);
+
+        DealerPanel dealerPanel = new DealerPanel(dealer);
+        dealerPanel.setBounds(cardCoordinateX - 100, 150, 400, 200);
+        layeredPane.add(dealerPanel, 0);
 
         //creation of second panel for buttons/betting
         JPanel secondPanel = new JPanel();
@@ -120,14 +126,6 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         {
             buttons.enableButtonsAfterBets();
             this.chips.disableAll();
-
-            JLabel flippedCard = deck.getFlippedCard();
-            flippedCard.setBounds(550, 100, 200, 200);
-            layeredPane.add(flippedCard, 0);
-
-            JLabel dealerCard = deck.pullCard(9); 
-            dealerCard.setBounds(650, 100, 200, 200);
-            layeredPane.add(dealerCard, 0);
 
             JLabel newCard = deck.pullCard(model.pullRandomCard());  //makes whole new card.
             newCard.setBounds(550, 400, 200, 200);

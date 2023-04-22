@@ -11,7 +11,8 @@ public class App {
     public static void main(String[] args) {
 
         User player = new User(); // model
+        Dealer dealer = new Dealer();
 
-        Controller controller = new Controller(player); //controller
+        Controller controller = new Controller(player, dealer); //controller
     }
 }
