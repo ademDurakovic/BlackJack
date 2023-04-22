@@ -147,25 +147,24 @@ public class User{
     public void userWon() {
         this.currentBalance += (currentBet * 2);
         this.currentBet = 0;
-        this.currentTotal = 0;
-        this.isPlaying = true;
-        this.initialBetPlaced = false;
-        notifyObservers();
+        newGame();
     }
 
     public void userLost() {
         this.currentBet = 0;
-        this.currentTotal = 0;
-        this.isPlaying = true;
-        this.initialBetPlaced = false;
         notifyObservers();
+        newGame();
     }
 
     public void userDraw() {
         this.currentBalance += currentBet;
         this.currentBet = 0;
+        notifyObservers();
+        newGame();
+    }
+
+    public void newGame() {
         this.currentTotal = 0;
-        this.isPlaying = true;
         this.initialBetPlaced = false;
         notifyObservers();
     }

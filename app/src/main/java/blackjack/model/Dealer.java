@@ -53,7 +53,7 @@ public class Dealer {
         while(dealerTotal < 17){
 
             this.notifyObservers();  
-            this.aceCase();  //checks for aces
+            this.aceCase();
             dealerTotal = this.addDeck();
         }
         this.doneHitting = true;
@@ -73,13 +73,16 @@ public class Dealer {
     }
 
     public void aceCase(){
-        for(int i = 0; i < dealerHand.size(); i++){
-            if(dealerHand.get(i) == 11){
-                dealerHand.set(i, 1);
-                break;
+        if (dealerTotal > 21) {
+
+            for(int i = 0; i < dealerHand.size(); i++){
+                if(dealerHand.get(i) == 11){
+                    dealerHand.set(i, 1);
+                    break;
+                }
             }
+            this.dealerTotal = this.addDeck();
         }
-        this.dealerTotal = this.addDeck();
     }
 
     public void notifyObservers()
