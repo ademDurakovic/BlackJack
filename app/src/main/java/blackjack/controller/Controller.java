@@ -32,7 +32,7 @@ public class Controller implements ControllerInterface{
     // tells the model the player placed the bet
     public void userPlacedBet(){
         this.model.placeBet();
-        this.dealer.initalDeal();
+      //  this.dealer.initalDeal();
     }
 
     //tells the model the player stood

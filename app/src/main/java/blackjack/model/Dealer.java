@@ -51,11 +51,7 @@ public class Dealer {
         this.aceCase();
         dealerTotal = this.addDeck();  //making sure we get most recent total of dealer deck.
         while(dealerTotal < 17){
-            try {
-                Thread.sleep(1000); // Pause for 1 second
-            } catch (InterruptedException e) {
-                System.out.println("Error!");
-            }
+
             this.notifyObservers();  
             this.aceCase();  //checks for aces
             dealerTotal = this.addDeck();
@@ -96,5 +92,9 @@ public class Dealer {
     }
     public boolean isInitalDealt(){
         return initalDeal;
+    }
+
+    public void setInitalDealt(boolean setter){
+        initalDeal = true;
     }
 }
