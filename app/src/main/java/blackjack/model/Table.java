@@ -12,9 +12,11 @@ public class Table {
     private boolean draw;
     private boolean userWon;
 
+
     public Table(Dealer dealer, User user) {
         this.dealer = dealer;
         this.user = user;
+      
     }
 
     // checks the betting situations mentioned in the requirements doc
@@ -41,6 +43,7 @@ public class Table {
         }
         
     }
+
 
 
 

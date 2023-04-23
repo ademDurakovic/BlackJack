@@ -126,27 +126,19 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         this.debt.setText("Debt: $" + String.valueOf(model.getDebt()));
         this.currentBet.setText("Current Bet: $" + String.valueOf(model.getCurrentBet()));
         System.out.println("Hand: " + model.getHand());
+        layeredPane.repaint();
 
         /*Inital dealing to the user currently. */
         if(model.isUserPlaying())
         {
             if(model.betPlaced())
             {
+                initialDealing();
                 buttons.enableButtonsAfterBets();
                 this.chips.disableAll();
-
-                JLabel newCard = deck.pullCard(model.pullRandomCard());  //makes whole new card.
-                newCard.setBounds(550, 400, 200, 200);
-                layeredPane.add(newCard, 0);
-                this.cards.add(newCard);
-
-                JLabel newCard2 = deck.pullCard(model.pullRandomCard());  //makes whole new card.
-                newCard2.setBounds(580, 395, 200, 200);
-                layeredPane.add(newCard2, 0);
-                this.cards.add(newCard2);
-
                 this.dealerPanel.update();
                 model.setInitialBetPlaced(false);
+
             }else if(model.didUserHit() && model.isUserAbleToHit()){
                 JLabel newCard3 = deck.pullCard(model.pullRandomCard());  //makes whole new card.
                 newCard3.setBounds(this.cardCoordinateX, this.cardCoordinateY, 200, 200);
@@ -157,21 +149,16 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
                 model.setBetPlaced(false);
             }else if(model.isStanding()){
                 buttons.disableAll();
+                dealer.startDrawing();
             }
             if (model.getHand() >= 21) {
                 dealer.startDrawing();
             }
-        } else if(model.userLost || model.userDrew || model.userWon){
-
-                for (JLabel card: this.cards) {
-                    layeredPane.remove(card);
-                }
-                this.cards.clear();
-                dealerPanel.removeCards();
+        } else if( (model.userLost || model.userDrew || model.userWon) && model.isStanding()){
                 this.cardCoordinateX = 610;
                 this.cardCoordinateY = 390;
                 System.out.println("in update of new Game.");
-                buttons.enableAll();
+                buttons.enableBeforeBetPlaced();
                 chips.enableAll();
                 mainPanel.revalidate();
                 mainPanel.repaint();
@@ -199,9 +186,32 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
                 default: break;
             }
         } else if (source instanceof ChipButton) {
+            clearTable();
             ChipButton button = (ChipButton)source;
             this.controller.userIncreasedBet(button.getValue());
         }
     }
 
+    public void clearTable() {
+        for (JLabel card: this.cards) {
+            layeredPane.remove(card);
+        }
+        this.cards.clear();
+        mainPanel.repaint();
+        dealerPanel.removeCards();
+    }
+
+    public void initialDealing() {
+
+        JLabel newCard = deck.pullCard(model.pullRandomCard());  //makes whole new card.
+        newCard.setBounds(550, 400, 200, 200);
+        layeredPane.add(newCard, 0);
+        this.cards.add(newCard);
+
+        JLabel newCard2 = deck.pullCard(model.pullRandomCard());  //makes whole new card.
+        newCard2.setBounds(580, 395, 200, 200);
+        layeredPane.add(newCard2, 0);
+        this.cards.add(newCard2);
+
+    }
 }

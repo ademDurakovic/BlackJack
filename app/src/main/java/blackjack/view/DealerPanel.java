@@ -37,7 +37,10 @@ public class DealerPanel extends JLayeredPane implements BlackJackObserver {
     }
 
     public void removeCards(){
-        this.removeAll();
+        for (JLabel card : this.cards){
+            this.remove(card);
+        }
+        this.cards.clear();
         xCord = 100;
         yCord = 15;
         this.revalidate(); // validate the layout to update the display
@@ -46,6 +49,7 @@ public class DealerPanel extends JLayeredPane implements BlackJackObserver {
     }
 
     public void update(){
+        this.repaint();
         
         /*Keep adding cards, the model will take care of whenever the dealer goes over 17. */
         if(dealer.getDealerHitting()){
