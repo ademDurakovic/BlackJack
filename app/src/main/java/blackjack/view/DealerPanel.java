@@ -47,6 +47,7 @@ public class DealerPanel extends JLayeredPane implements BlackJackObserver {
             JLabel newCard = deck.pullCard(dealer.pullRandomCard());  //makes whole new card.
             newCard.setBounds(xCord , yCord, 200, 200);
             this.add(newCard, 0);
+            this.cards.add(newCard);
             this.revalidate(); // validate the layout to update the display
             this.repaint(); // repaint the panel to ensure that the new card is displayed
             
@@ -59,11 +60,11 @@ public class DealerPanel extends JLayeredPane implements BlackJackObserver {
             JLabel firstCard = deck.pullCard(dealer.pullRandomCard());
             firstCard.setBounds(xCord, yCord, 200, 200);
             this.add(firstCard, 0);
+            this.cards.add(firstCard);
             dealer.setInitalDealt(true);
             this.revalidate(); // validate the layout to update the display
             this.repaint(); // repaint the panel to ensure that the new card is displayed
         }else if (dealer.isDone()) {
-            //this.remove(0);
             controller.getWinner();
             dealer.reset();
             xCord = 100;

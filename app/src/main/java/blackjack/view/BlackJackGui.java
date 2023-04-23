@@ -30,7 +30,6 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
     private Table table;
     private DealerPanel dealerPanel;
     private ArrayList<JLabel> cards;
-    private int numCards = 0;
 
     public BlackJackGui(ControllerInterface controller, User model, Dealer dealer, Table table){
         this.cardCoordinateX = 610;
@@ -139,12 +138,12 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
                 JLabel newCard = deck.pullCard(model.pullRandomCard());  //makes whole new card.
                 newCard.setBounds(550, 400, 200, 200);
                 layeredPane.add(newCard, 0);
-                numCards++;
+                this.cards.add(newCard);
 
                 JLabel newCard2 = deck.pullCard(model.pullRandomCard());  //makes whole new card.
                 newCard2.setBounds(580, 395, 200, 200);
                 layeredPane.add(newCard2, 0);
-                numCards++;
+                this.cards.add(newCard2);
 
                 this.dealerPanel.update();
                 model.setInitialBetPlaced(false);
@@ -152,7 +151,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
                 JLabel newCard3 = deck.pullCard(model.pullRandomCard());  //makes whole new card.
                 newCard3.setBounds(this.cardCoordinateX, this.cardCoordinateY, 200, 200);
                 layeredPane.add(newCard3, 0);
-                numCards++;
+                this.cards.add(newCard3);
                 this.cardCoordinateX += 30;
                 this.cardCoordinateY -= 5;
                 model.setBetPlaced(false);
@@ -165,6 +164,10 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         } else {
             if(model.userLost || model.userDrew || model.userWon){
 
+                for (JLabel card: this.cards) {
+                    layeredPane.remove(card);
+                }
+                this.cards.clear();
                 this.cardCoordinateX = 610;
                 this.cardCoordinateY = 390;
                 System.out.println("HERE5");
