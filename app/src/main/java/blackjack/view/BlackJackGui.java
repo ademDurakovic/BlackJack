@@ -6,6 +6,8 @@ import blackjack.model.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 public class BlackJackGui implements ActionListener, BlackJackObserver{
@@ -27,11 +29,13 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
     private Dealer dealer; //dealer model class
     private Table table;
     private DealerPanel dealerPanel;
-    
+    private ArrayList<JLabel> cards;
+    private int numCards = 0;
 
     public BlackJackGui(ControllerInterface controller, User model, Dealer dealer, Table table){
         this.cardCoordinateX = 610;
         this.cardCoordinateY = 390;
+        this.cards = new ArrayList<JLabel>();
         this.controller = controller;
         this.model = model;
         this.dealer = dealer;
@@ -122,40 +126,52 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         this.balance.setText("Balance: $" + String.valueOf(model.getBalance()));
         this.debt.setText("Debt: $" + String.valueOf(model.getDebt()));
         this.currentBet.setText("Current Bet: $" + String.valueOf(model.getCurrentBet()));
+        System.out.println("Hand: " + model.getHand());
 
         /*Inital dealing to the user currently. */
-        if(model.betPlaced())
+        if(model.isUserPlaying())
         {
-            buttons.enableButtonsAfterBets();
-            this.chips.disableAll();
+            if(model.betPlaced())
+            {
+                buttons.enableButtonsAfterBets();
+                this.chips.disableAll();
 
-            JLabel newCard = deck.pullCard(model.pullRandomCard());  //makes whole new card.
-            newCard.setBounds(550, 400, 200, 200);
-            layeredPane.add(newCard, 0);
+                JLabel newCard = deck.pullCard(model.pullRandomCard());  //makes whole new card.
+                newCard.setBounds(550, 400, 200, 200);
+                layeredPane.add(newCard, 0);
+                numCards++;
 
-            JLabel newCard2 = deck.pullCard(model.pullRandomCard());  //makes whole new card.
-            newCard2.setBounds(580, 395, 200, 200);
-            layeredPane.add(newCard2, 0);
+                JLabel newCard2 = deck.pullCard(model.pullRandomCard());  //makes whole new card.
+                newCard2.setBounds(580, 395, 200, 200);
+                layeredPane.add(newCard2, 0);
+                numCards++;
 
-            this.dealerPanel.update();
-            model.setInitialBetPlaced(false);
+                this.dealerPanel.update();
+                model.setInitialBetPlaced(false);
+            }else if(model.didUserHit() && model.isUserAbleToHit()){
+                JLabel newCard3 = deck.pullCard(model.pullRandomCard());  //makes whole new card.
+                newCard3.setBounds(this.cardCoordinateX, this.cardCoordinateY, 200, 200);
+                layeredPane.add(newCard3, 0);
+                numCards++;
+                this.cardCoordinateX += 30;
+                this.cardCoordinateY -= 5;
+                model.setBetPlaced(false);
+            }else if(model.isStanding()){
+                buttons.disableAll();
+            }
+            if (model.getHand() >= 21) {
+                dealer.startDrawing();
+            }
+        } else {
+            if(model.userLost || model.userDrew || model.userWon){
+
+                this.cardCoordinateX = 610;
+                this.cardCoordinateY = 390;
+                System.out.println("HERE5");
+                buttons.enableBeforeBetPlaced();
+                chips.enableAll();
+            }
         }
-        if(model.didUserHit() && model.isUserAbleToHit()){
-            JLabel newCard3 = deck.pullCard(model.pullRandomCard());  //makes whole new card.
-            newCard3.setBounds(this.cardCoordinateX, this.cardCoordinateY, 200, 200);
-            layeredPane.add(newCard3, 0);
-            this.cardCoordinateX += 30;
-            this.cardCoordinateY -= 5;
-            model.setBetPlaced(false);
-        }else if(model.isStanding()){
-            buttons.disableAll();
-        }
-        else if(model.userLost || model.userDrew || model.userWon){
-            System.out.println("HERE5");
-            buttons.enableAll();
-            chips.enableAll();
-        }
-    
     }
 
     @Override

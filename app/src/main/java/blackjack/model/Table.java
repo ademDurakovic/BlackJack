@@ -27,18 +27,13 @@ public class Table {
         } else {
             if (user.getHand() > dealer.getHand()){
                 user.userWon();
-                this.draw = false;
-                this.userWon = true;
             } else if (user.getHand() == dealer.getHand()) {
                 user.userDraw();
-                this.draw = true;
-                this.userWon = false;
             } else if (dealer.getHand() > user.getHand()) {
                 user.userLost();
-                this.draw = false;
-                this.userWon = false;
             }
         }
+        
     }
 
 

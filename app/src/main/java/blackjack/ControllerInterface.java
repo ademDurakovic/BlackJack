@@ -6,4 +6,5 @@ public interface ControllerInterface {
     public void userPlacedBet();
     public void userStand();
     public void getWinner();
+    public void dealerDraw();
 }

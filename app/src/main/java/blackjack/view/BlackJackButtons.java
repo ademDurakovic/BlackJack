@@ -59,4 +59,15 @@ public class BlackJackButtons extends JPanel {
         }
         this.buttons[0].setEnabled(false);
     }
+
+    public void enableBeforeBetPlaced() {
+        for(int i = 0; i < 5; i++){
+            if(i == 1 || i==2 || i==3 )
+            {
+                buttons[i].setEnabled(false);
+            }else {
+                buttons[i].setEnabled(true);
+            }
+        }
+    }
 }

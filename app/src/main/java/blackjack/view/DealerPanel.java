@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import java.util.ArrayList;
+
 import blackjack.BlackJackObserver;
 import blackjack.ControllerInterface;
 import blackjack.model.*;
@@ -15,9 +17,12 @@ public class DealerPanel extends JLayeredPane implements BlackJackObserver {
     private ControllerInterface controller;
     private int xCord = 100;
     private int yCord = 15;
+    private ArrayList<JLabel> cards;
 
 
     public DealerPanel(Dealer dealer, Table table, ControllerInterface controller){
+        super();
+        this.cards = new ArrayList<JLabel>();
         this.dealer = dealer;
         this.table = table;
         this.controller = controller;
@@ -44,6 +49,7 @@ public class DealerPanel extends JLayeredPane implements BlackJackObserver {
             this.add(newCard, 0);
             this.revalidate(); // validate the layout to update the display
             this.repaint(); // repaint the panel to ensure that the new card is displayed
+            
         }
         /*triggered when user clicks bet.  */
         else if (dealer.isInitalDealt() == false){
@@ -57,7 +63,11 @@ public class DealerPanel extends JLayeredPane implements BlackJackObserver {
             this.revalidate(); // validate the layout to update the display
             this.repaint(); // repaint the panel to ensure that the new card is displayed
         }else if (dealer.isDone()) {
+            //this.remove(0);
             controller.getWinner();
+            dealer.reset();
+            xCord = 100;
+            yCord = 15;
         }
     }
     

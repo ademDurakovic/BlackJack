@@ -46,6 +46,10 @@ public class Controller implements ControllerInterface{
         System.out.println("HERE2");
     }
 
+    public void dealerDraw() {
+        this.dealer.startDrawing();
+    }
+
     public void getWinner() {
         this.table.checkWinner();
     }

@@ -132,6 +132,7 @@ public class User{
         this.isStanding = true;
         notifyObservers();
     }
+
     /*Finds total sum of the users cards */
     public int addDeck() {
         int total = 0;
@@ -150,24 +151,23 @@ public class User{
     // betting situations
     public void userWon() {
         this.currentBalance += (currentBet * 2);
-        this.currentBet = 0;
         userWon= true;
         System.out.println("userWon");
+        notifyObservers();
         newGame();
     }
 
     public void userLost() {
-        this.currentBet = 0;
-        notifyObservers();
         userLost= true;
         System.out.println("userLost");
+        notifyObservers();
         newGame();
     }
 
     public void userDraw() {
         this.currentBalance += currentBet;
-        this.currentBet = 0;
         userDrew = true;
+        notifyObservers();
         
         System.out.println("UserDrew");
         newGame();
@@ -175,10 +175,12 @@ public class User{
 
     public void newGame() {
         this.currentTotal = 0;
+        this.currentBet = 0;
         this.initialBetPlaced = false;
         isStanding = false;
         playerHand.clear();
         System.out.println("newGame");
+        this.isPlaying = true;
         notifyObservers();
     }
 /*Getters: */
@@ -203,6 +205,10 @@ public class User{
 
     public int getHandIndex(){
         return this.handIndex;  //returns hand index.
+    }
+
+    public boolean isUserPlaying() {
+        return this.isPlaying;
     }
 
     public void register(BlackJackObserver o)

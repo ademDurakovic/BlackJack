@@ -51,7 +51,6 @@ public class Dealer {
         this.aceCase();
         dealerTotal = this.addDeck();  //making sure we get most recent total of dealer deck.
         while(dealerTotal < 17){
-
             this.notifyObservers();  
             this.aceCase();
             dealerTotal = this.addDeck();
@@ -104,10 +103,19 @@ public class Dealer {
     }
 
     public void setInitalDealt(boolean setter){
-        initalDeal = true;
+        initalDeal = setter;
     }
 
     public int getHand() {
         return this.dealerTotal;
+    }
+
+    public void reset() {
+        this.dealerHand.clear();
+        this.dealerTotal = 0;
+        //this.initalDeal = false;
+        this.doneHitting = false;
+        this.dealerIsHitting = false;
+        notifyObservers();
     }
 }
