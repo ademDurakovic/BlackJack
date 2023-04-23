@@ -53,4 +53,12 @@ public class Controller implements ControllerInterface{
     public void getWinner() {
         this.table.checkWinner();
     }
+
+    public void userDoubleDown(){
+        if(model.doubleDown()){
+            this.model.hit();
+            this.model.stand();
+            this.dealer.startDrawing();
+        }
+    }
 }

@@ -7,4 +7,5 @@ public interface ControllerInterface {
     public void userStand();
     public void getWinner();
     public void dealerDraw();
-}
+    public void userDoubleDown();        
+ }

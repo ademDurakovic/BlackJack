@@ -21,6 +21,7 @@ public class User{
     public boolean userWon = false;
     public boolean userLost = false;
     public boolean userDrew = false;
+    private boolean canDouble;
 
 
     public User(){
@@ -36,11 +37,13 @@ public class User{
         this.currentBet = 0;
         this.userHit = false;
         this.isStanding = false;
+        this.canDouble = true;
         currentTotal = 0;
     }
 
 
     public void initialDeal(){
+        this.canDouble = true;
         initialBetPlaced = true;  //bet has been placed, and inital hit takes place.
         initialHit();
     }
@@ -52,6 +55,7 @@ public class User{
 
     public void hit(){
         userHit = true;
+        this.canDouble = false;
         notifyObservers();     
     }
 
@@ -73,11 +77,15 @@ public class User{
         }
     }
     /*COMING IN LATER DELIVERABLE. */
-    public void doubleDown(){
-        // gives the user a card
-        hit();
-        // after doubling the players turn is done
-        this.isPlaying = false;
+    public boolean doubleDown(){
+        if((this.currentBalance - this.currentBet) > 0 && this.canDouble == true){
+            this.currentBalance -= this.currentBet;
+            this.currentBet *= 2;
+            notifyObservers();
+            return true;
+        }
+        return false;
+        
     }
     /* sets the bet.*/
     public void setBetPlaced(boolean bet)
