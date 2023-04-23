@@ -49,7 +49,6 @@ public class DealerPanel extends JLayeredPane implements BlackJackObserver {
     }
 
     public void update(){
-        this.repaint();
         
         /*Keep adding cards, the model will take care of whenever the dealer goes over 17. */
         if(dealer.getDealerHitting()){
@@ -66,22 +65,26 @@ public class DealerPanel extends JLayeredPane implements BlackJackObserver {
         }
         /*triggered when user clicks bet.  */
         else if (dealer.isInitalDealt() == false){
-            this.add(flippedCard, 0);
-            xCord += 10;
-            yCord += 10;
-            JLabel firstCard = deck.pullCard(dealer.pullRandomCard());
-            firstCard.setBounds(xCord, yCord, 200, 200);
-            this.add(firstCard, 0);
-            this.cards.add(firstCard);
-            dealer.setInitalDealt(true);
-            this.revalidate(); // validate the layout to update the display
-            this.repaint(); // repaint the panel to ensure that the new card is displayed
+            initialDealer();
         }else if (dealer.isDone()) {
             controller.getWinner();
             dealer.reset();
             xCord = 100;
             yCord = 15;
         }
+    }
+
+    public void initialDealer() {
+        this.add(flippedCard, 0);
+        xCord += 10;
+        yCord += 10;
+        JLabel firstCard = deck.pullCard(dealer.pullRandomCard());
+        firstCard.setBounds(xCord, yCord, 200, 200);
+        this.add(firstCard, 0);
+        this.cards.add(firstCard);
+        dealer.setInitalDealt(true);
+        this.revalidate(); // validate the layout to update the display
+        this.repaint(); // repaint the panel to ensure that the new card is displayed
     }
     
 }

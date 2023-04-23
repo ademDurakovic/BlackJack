@@ -127,6 +127,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         this.currentBet.setText("Current Bet: $" + String.valueOf(model.getCurrentBet()));
         System.out.println("Hand: " + model.getHand());
         layeredPane.repaint();
+        dealerPanel.repaint();
 
         /*Inital dealing to the user currently. */
         if(model.isUserPlaying())
@@ -134,6 +135,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
             if(model.betPlaced())
             {
                 initialDealing();
+                dealerPanel.initialDealer();
                 buttons.enableButtonsAfterBets();
                 this.chips.disableAll();
                 this.dealerPanel.update();
@@ -155,8 +157,6 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
                 dealer.startDrawing();
             }
         } else if( (model.userLost || model.userDrew || model.userWon) && model.isStanding()){
-                this.cardCoordinateX = 610;
-                this.cardCoordinateY = 390;
                 System.out.println("in update of new Game.");
                 buttons.enableBeforeBetPlaced();
                 chips.enableAll();
@@ -202,6 +202,8 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
     }
 
     public void initialDealing() {
+        this.cardCoordinateX = 610;
+        this.cardCoordinateY = 390;
 
         JLabel newCard = deck.pullCard(model.pullRandomCard());  //makes whole new card.
         newCard.setBounds(550, 400, 200, 200);
