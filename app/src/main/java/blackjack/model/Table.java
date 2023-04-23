@@ -21,15 +21,21 @@ public class Table {
     public void checkWinner() {
         System.out.println("Got heere");
         if (user.getHand() > 21) {
+            dealer.reset();
             user.userLost();
         } else if (dealer.getHand() > 21 ) {
+            dealer.reset();
             user.userWon();
+            
         } else {
             if (user.getHand() > dealer.getHand()){
+                dealer.reset();
                 user.userWon();
             } else if (user.getHand() == dealer.getHand()) {
+                dealer.reset();
                 user.userDraw();
             } else if (dealer.getHand() > user.getHand()) {
+                dealer.reset();
                 user.userLost();
             }
         }

@@ -36,6 +36,15 @@ public class DealerPanel extends JLayeredPane implements BlackJackObserver {
         flippedCard.setBounds(xCord, yCord, 200, 200);
     }
 
+    public void removeCards(){
+        this.removeAll();
+        xCord = 100;
+        yCord = 15;
+        this.revalidate(); // validate the layout to update the display
+        this.repaint();
+
+    }
+
     public void update(){
         
         /*Keep adding cards, the model will take care of whenever the dealer goes over 17. */
@@ -49,8 +58,7 @@ public class DealerPanel extends JLayeredPane implements BlackJackObserver {
             this.add(newCard, 0);
             this.cards.add(newCard);
             this.revalidate(); // validate the layout to update the display
-            this.repaint(); // repaint the panel to ensure that the new card is displayed
-            
+            this.repaint(); // repaint the panel to ensure that the new card is displayed 
         }
         /*triggered when user clicks bet.  */
         else if (dealer.isInitalDealt() == false){

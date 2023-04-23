@@ -161,20 +161,22 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
             if (model.getHand() >= 21) {
                 dealer.startDrawing();
             }
-        } else {
-            if(model.userLost || model.userDrew || model.userWon){
+        } else if(model.userLost || model.userDrew || model.userWon){
 
                 for (JLabel card: this.cards) {
                     layeredPane.remove(card);
                 }
                 this.cards.clear();
+                dealerPanel.removeCards();
                 this.cardCoordinateX = 610;
                 this.cardCoordinateY = 390;
-                System.out.println("HERE5");
-                buttons.enableBeforeBetPlaced();
+                System.out.println("in update of new Game.");
+                buttons.enableAll();
                 chips.enableAll();
+                mainPanel.revalidate();
+                mainPanel.repaint();
             }
-        }
+        
     }
 
     @Override
