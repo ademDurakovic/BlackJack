@@ -78,7 +78,7 @@ public class User{
     }
     /*COMING IN LATER DELIVERABLE. */
     public boolean doubleDown(){
-        if((this.currentBalance - this.currentBet) > 0 && this.canDouble == true){
+        if((this.currentBalance - this.currentBet) >= 0 && this.canDouble == true){
             this.currentBalance -= this.currentBet;
             this.currentBet *= 2;
             notifyObservers();
