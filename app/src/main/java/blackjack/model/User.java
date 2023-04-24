@@ -46,6 +46,9 @@ public class User{
         this.canDouble = true;
         initialBetPlaced = true;  //bet has been placed, and inital hit takes place.
         initialHit();
+        if(BlackJack()){
+            userBlackJack();
+        }
     }
 
     public void initialHit(){
@@ -165,6 +168,14 @@ public class User{
         newGame();
     }
 
+    public void userBlackJack(){
+        this.currentBalance += ((currentBet * 3) /2); // will round down
+        userWon= true;
+        System.out.println("hit blackjack");
+        notifyObservers();
+        newGame();
+    }
+
     public void userLost() {
         userLost= true;
         System.out.println("userLost");
@@ -190,6 +201,13 @@ public class User{
         System.out.println("newGame");
         this.isPlaying = true;
         notifyObservers();
+    }
+
+    public boolean BlackJack(){
+       if(currentTotal == 21) {
+        return true;
+       }
+       return false;
     }
 /*Getters: */
 

@@ -18,7 +18,7 @@ public class Table {
         this.user = user;
       
     }
-
+    
     // checks the betting situations mentioned in the requirements doc
     public void checkWinner() {
         System.out.println("Got heere");
