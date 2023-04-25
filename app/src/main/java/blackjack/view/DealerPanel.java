@@ -74,6 +74,24 @@ public class DealerPanel extends JLayeredPane implements BlackJackObserver {
         }
     }
 
+    public void userBlackJack() {
+        xCord = 100;
+        yCord = 15;
+        this.remove(flippedCard);
+        JLabel firstCard = deck.pullCard(dealer.pullRandomCard());
+        firstCard.setBounds(xCord, yCord, 200, 200);
+        this.add(firstCard, 0);
+
+        xCord += 10;
+        yCord += 10;
+
+        JLabel secondCard = deck.pullCard(dealer.pullRandomCard());
+        secondCard.setBounds(xCord, yCord, 200, 200);
+        this.add(secondCard, 0);
+    }
+
+
+
     public void initialDealer() {
         this.add(flippedCard, 0);
         xCord += 10;

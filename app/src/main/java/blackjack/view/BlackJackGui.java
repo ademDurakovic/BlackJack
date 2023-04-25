@@ -151,10 +151,17 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
                 model.setBetPlaced(false);
             }else if(model.isStanding()){
                 buttons.disableAll();
-                dealer.startDrawing();
+                if(!model.getBlackJack()) {
+                    dealer.startDrawing();
+                }
             }
             if (model.getHand() >= 21) {
-                dealer.startDrawing();
+                if(model.getBlackJack()) {
+                    dealerPanel.userBlackJack();
+                } else {
+                    dealer.startDrawing();
+                }
+
             }
         } else if( (model.userLost || model.userDrew || model.userWon) && model.isStanding()){
                 System.out.println("in update of new Game.");

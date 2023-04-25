@@ -1,6 +1,9 @@
 package blackjack.model;
 
 import java.util.Random;
+
+import javax.swing.text.StyledEditorKit.BoldAction;
+
 import java.util.ArrayList;
 
 import blackjack.BlackJackObserver;
@@ -22,6 +25,7 @@ public class User{
     public boolean userLost = false;
     public boolean userDrew = false;
     private boolean canDouble;
+    private boolean userGotBlackJack;
 
 
     public User(){
@@ -38,6 +42,7 @@ public class User{
         this.userHit = false;
         this.isStanding = false;
         this.canDouble = true;
+        this.userGotBlackJack = false;
         currentTotal = 0;
     }
 
@@ -171,6 +176,7 @@ public class User{
     public void userBlackJack(){
         this.currentBalance += ((currentBet * 3) /2); // will round down
         userWon= true;
+        userGotBlackJack = true;
         System.out.println("hit blackjack");
         notifyObservers();
         newGame();
@@ -195,6 +201,7 @@ public class User{
     public void newGame() {
         this.currentTotal = 0;
         this.currentBet = 0;
+        this.userGotBlackJack = false;
         this.initialBetPlaced = false;
         isStanding = false;
         playerHand.clear();
@@ -231,6 +238,10 @@ public class User{
 
     public int getHandIndex(){
         return this.handIndex;  //returns hand index.
+    }
+
+    public boolean getBlackJack() {
+        return this.userGotBlackJack;
     }
 
     public boolean isUserPlaying() {
