@@ -138,10 +138,6 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
                 dealerPanel.initialDealer();
                 buttons.enableButtonsAfterBets();
                 this.chips.disableAll();
-
-                if (model.getHand() >= 21) {   
-                    dealerPanel.userBlackJack();
-                } 
                 model.setInitialBetPlaced(false);
             }
             else if(model.didUserHit() && model.isUserAbleToHit()){
@@ -153,18 +149,15 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
                 this.cardCoordinateX += 30;
                 this.cardCoordinateY -= 5;
                 model.setBetPlaced(false);
-            }
-             
+            } 
             else if(model.isStanding()){
                 buttons.disableAll();
-                if(!model.getBlackJack()) {
-                    dealer.startDrawing();
-                }
-                
+                dealer.startDrawing();
             }
-           
-            else{
-                if( (model.userLost || model.userDrew || model.userWon) && model.isStanding()){
+            if(model.getHand() >= 21) {
+                dealer.startDrawing();
+            }
+        }else if( (model.userLost || model.userDrew || model.userWon) && model.isStanding()){
                     System.out.println("in update of new Game.");
                     buttons.enableBeforeBetPlaced();
                     chips.enableAll();
@@ -172,10 +165,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
                     mainPanel.repaint();
                 }
 
-            } 
         }
-        
-    }
 
     @Override
     public void actionPerformed(ActionEvent event)
@@ -188,13 +178,10 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
             /*Switch case based on which button the user clicked: */
             switch(buttonIndex){
                 case 0: this.controller.userPlacedBet();
-    
                         break;
                 case 1: this.controller.userDoubleDown();
                         break;
-                case 2: 
-                        System.out.println("hit switch statement.");
-                        this.controller.userHit();
+                case 2: this.controller.userHit();
                         break;
                 case 3: this.controller.userStand();
                         break;

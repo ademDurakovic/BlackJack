@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class Table {
 
-    private ArrayList<BlackJackObserver> observers;
     private Dealer dealer;
     private User user;
     private boolean draw;

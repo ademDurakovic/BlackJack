@@ -1,9 +1,6 @@
 package blackjack.model;
 
 import java.util.Random;
-
-import javax.swing.text.StyledEditorKit.BoldAction;
-
 import java.util.ArrayList;
 
 import blackjack.BlackJackObserver;
@@ -25,8 +22,6 @@ public class User{
     public boolean userLost = false;
     public boolean userDrew = false;
     private boolean canDouble;
-    private boolean userGotBlackJack;
-
 
     public User(){
         /*Initial Variables. */
@@ -42,7 +37,6 @@ public class User{
         this.userHit = false;
         this.isStanding = false;
         this.canDouble = true;
-        this.userGotBlackJack = false;
         currentTotal = 0;
     }
 
@@ -51,14 +45,10 @@ public class User{
         this.canDouble = true;
         initialBetPlaced = true;  //bet has been placed, and inital hit takes place.
         initialHit();
-        if(BlackJack()){
-            userBlackJack();
-        }
     }
 
     public void initialHit(){
         notifyObservers(); //random cards are pulled at update.
-
     }
 
     public void hit(){
@@ -66,12 +56,6 @@ public class User{
         this.canDouble = false;
         System.out.println("user hit funciton.");
         notifyObservers();     
-    }
-
-
-    public void userBlackJack(){
-        this.userGotBlackJack = true;
-        stand();
     }
 
     public void stand(){
@@ -92,20 +76,6 @@ public class User{
         return num;
     }
 
-    public int i = 8;
-    public int pullRandomCard2(){
-        int num  = this.i;
-        playerHand.add(num+2);       //since there is no 0 card we do a +2 increment
-        currentTotal = this.addDeck();
-        if(currentTotal > 21) {   // we want to see if the user busts so that we can disable buttons. The currentTotal can change if they have an ace so we must check that.
-            this.aceCase();
-        }
-        didUserBust();
-        System.out.println(currentTotal);
-        this.i++;
-        if(this.i == 10){this.i = 8;}
-        return num;
-    }
     /*checks score to see if it is 21 or over, if so we stand and the dealer will take control. */
     public void didUserBust(){
         if (currentTotal >= 21 && playerHand.size() > 2){
@@ -206,7 +176,6 @@ public class User{
         this.currentBalance += currentBet;
         userDrew = true;
         notifyObservers();
-        
         System.out.println("UserDrew");
         newGame();
     }
@@ -214,7 +183,6 @@ public class User{
     public void newGame() {
         this.currentTotal = 0;
         this.currentBet = 0;
-        this.userGotBlackJack = false;
         this.initialBetPlaced = false;
         isStanding = false;
         playerHand.clear();
@@ -223,12 +191,6 @@ public class User{
         notifyObservers();
     }
 
-    public boolean BlackJack(){
-       if(currentTotal == 21) {
-        return true;
-       }
-       return false;
-    }
 /*Getters: */
 
     public int getHand() {
@@ -251,10 +213,6 @@ public class User{
 
     public int getHandIndex(){
         return this.handIndex;  //returns hand index.
-    }
-
-    public boolean getBlackJack() {
-        return this.userGotBlackJack;
     }
 
     public boolean isUserPlaying() {
