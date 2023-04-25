@@ -138,10 +138,14 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
                 dealerPanel.initialDealer();
                 buttons.enableButtonsAfterBets();
                 this.chips.disableAll();
-                this.dealerPanel.update();
-                model.setInitialBetPlaced(false);
 
-            }else if(model.didUserHit() && model.isUserAbleToHit()){
+                if (model.getHand() >= 21) {   
+                    dealerPanel.userBlackJack();
+                } 
+                model.setInitialBetPlaced(false);
+            }
+            else if(model.didUserHit() && model.isUserAbleToHit()){
+                System.out.println("pulling card.");
                 JLabel newCard3 = deck.pullCard(model.pullRandomCard());  //makes whole new card.
                 newCard3.setBounds(this.cardCoordinateX, this.cardCoordinateY, 200, 200);
                 layeredPane.add(newCard3, 0);
@@ -149,27 +153,27 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
                 this.cardCoordinateX += 30;
                 this.cardCoordinateY -= 5;
                 model.setBetPlaced(false);
-            }else if(model.isStanding()){
+            }
+             
+            else if(model.isStanding()){
                 buttons.disableAll();
                 if(!model.getBlackJack()) {
                     dealer.startDrawing();
                 }
+                
             }
-            if (model.getHand() >= 21) {
-                if(model.getBlackJack()) {
-                    dealerPanel.userBlackJack();
-                } else {
-                    dealer.startDrawing();
+           
+            else{
+                if( (model.userLost || model.userDrew || model.userWon) && model.isStanding()){
+                    System.out.println("in update of new Game.");
+                    buttons.enableBeforeBetPlaced();
+                    chips.enableAll();
+                    mainPanel.revalidate();
+                    mainPanel.repaint();
                 }
 
-            }
-        } else if( (model.userLost || model.userDrew || model.userWon) && model.isStanding()){
-                System.out.println("in update of new Game.");
-                buttons.enableBeforeBetPlaced();
-                chips.enableAll();
-                mainPanel.revalidate();
-                mainPanel.repaint();
-            }
+            } 
+        }
         
     }
 
@@ -184,10 +188,13 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
             /*Switch case based on which button the user clicked: */
             switch(buttonIndex){
                 case 0: this.controller.userPlacedBet();
+    
                         break;
                 case 1: this.controller.userDoubleDown();
                         break;
-                case 2: this.controller.userHit();
+                case 2: 
+                        System.out.println("hit switch statement.");
+                        this.controller.userHit();
                         break;
                 case 3: this.controller.userStand();
                         break;

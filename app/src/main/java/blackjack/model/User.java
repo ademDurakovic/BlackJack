@@ -64,7 +64,20 @@ public class User{
     public void hit(){
         userHit = true;
         this.canDouble = false;
+        System.out.println("user hit funciton.");
         notifyObservers();     
+    }
+
+
+    public void userBlackJack(){
+        this.userGotBlackJack = true;
+        stand();
+    }
+
+    public void stand(){
+        this.isPlaying = false;
+        this.isStanding = true;
+        notifyObservers();
     }
 
     public int pullRandomCard(){
@@ -78,9 +91,24 @@ public class User{
         System.out.println(currentTotal);
         return num;
     }
+
+    public int i = 8;
+    public int pullRandomCard2(){
+        int num  = this.i;
+        playerHand.add(num+2);       //since there is no 0 card we do a +2 increment
+        currentTotal = this.addDeck();
+        if(currentTotal > 21) {   // we want to see if the user busts so that we can disable buttons. The currentTotal can change if they have an ace so we must check that.
+            this.aceCase();
+        }
+        didUserBust();
+        System.out.println(currentTotal);
+        this.i++;
+        if(this.i == 10){this.i = 8;}
+        return num;
+    }
     /*checks score to see if it is 21 or over, if so we stand and the dealer will take control. */
     public void didUserBust(){
-        if (currentTotal >= 21){
+        if (currentTotal >= 21 && playerHand.size() > 2){
             this.stand();
         }
     }
@@ -142,12 +170,6 @@ public class User{
         }
         this.currentTotal = this.addDeck();
     }
-    /*user does not get a card and buttons will be disabled in GUI */
-    public void stand(){
-        this.isPlaying = false;
-        this.isStanding = true;
-        notifyObservers();
-    }
 
     /*Finds total sum of the users cards */
     public int addDeck() {
@@ -169,15 +191,6 @@ public class User{
         this.currentBalance += (currentBet * 2);
         userWon= true;
         System.out.println("userWon");
-        notifyObservers();
-        newGame();
-    }
-
-    public void userBlackJack(){
-        this.currentBalance += ((currentBet * 3) /2); // will round down
-        userWon= true;
-        userGotBlackJack = true;
-        System.out.println("hit blackjack");
         notifyObservers();
         newGame();
     }

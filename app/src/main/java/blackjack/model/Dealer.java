@@ -58,7 +58,6 @@ public class Dealer {
         this.doneHitting = true;
         this.dealerIsHitting = false;
         notifyObservers();
-
     }
 
     public int addDeck() {
