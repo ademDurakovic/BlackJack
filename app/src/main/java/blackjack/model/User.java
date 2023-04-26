@@ -76,6 +76,22 @@ public class User{
         return num;
     }
 
+    /*CODE FOR BLACKJACK ON RIP */
+    int j = 8;
+    public int pullRandomCard2(){
+        int num =  j;  //grabs random value, deck takes care of suite.
+        playerHand.add(num+2);       //since there is no 0 card we do a +2 increment
+        currentTotal = this.addDeck();
+        if(currentTotal > 21) {   // we want to see if the user busts so that we can disable buttons. The currentTotal can change if they have an ace so we must check that.
+            this.aceCase();
+        }
+        j++;
+        if(j == 10){j = 8;}
+        didUserBust();
+        System.out.println(currentTotal);
+        return num;
+    }
+
     /*checks score to see if it is 21 or over, if so we stand and the dealer will take control. */
     public void didUserBust(){
         if (currentTotal >= 21 && playerHand.size() > 2){
