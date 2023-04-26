@@ -155,6 +155,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
                 dealer.startDrawing();
             }
             if(model.getHand() >= 21) {
+                model.stand();
                 dealer.startDrawing();
             }
         }else if( (model.userLost || model.userDrew || model.userWon) && model.isStanding()){
