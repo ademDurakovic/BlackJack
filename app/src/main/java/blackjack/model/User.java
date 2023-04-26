@@ -23,6 +23,7 @@ public class User{
     public boolean userDrew = false;
     private boolean canDouble;
 
+
     public User(){
         /*Initial Variables. */
         this.initialBetPlaced = false;
@@ -39,12 +40,25 @@ public class User{
         this.canDouble = true;
         currentTotal = 0;
     }
+    public boolean isBlackJack(){
+        if(currentTotal == 21){
+            return true;
+        }
+        return false;
+    }
 
 
     public void initialDeal(){
         this.canDouble = true;
         initialBetPlaced = true;  //bet has been placed, and inital hit takes place.
         initialHit();
+        if(isBlackJack()){
+
+        }
+    }
+
+    public void userBlackJack(){
+
     }
 
     public void initialHit(){
@@ -256,6 +270,10 @@ public class User{
     // returns a boolean on whether or not the user chose to stand
     public boolean isStanding(){
         return isStanding;
+    }
+
+    public int getTotalCards(){
+        return playerHand.size();
     }
 
     

@@ -13,6 +13,7 @@ public class Dealer {
     private int dealerTotal;
     private boolean doneHitting;
     private boolean dealerIsHitting; // will be used in dealerPanel to see if hes hitting 
+    public boolean userBlackJackorLost = false;
 
     public Dealer(){
         cardGenerator = new Random();
@@ -27,6 +28,14 @@ public class Dealer {
     public void initalDeal(){
         notifyObservers();  //notify bet was made. We need to add a blank card and a real one.
         initalDeal = true; //inital has been dealt.
+    }
+
+    public void flipCard(){
+        userBlackJackorLost = true;
+        notifyObservers();
+        userBlackJackorLost = false;
+        this.doneHitting = true;
+        notifyObservers();
     }
 
 
