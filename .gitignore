@@ -1,6 +1,10 @@
 .gradle
 /build/
 build
+app/bin
+
+#DS Store files
+*.DS_Store
 
 # Compiled class file
 *.class
