@@ -141,7 +141,6 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
                 model.setInitialBetPlaced(false);
             }
             else if(model.didUserHit() && model.isUserAbleToHit()){
-                System.out.println("pulling card.");
                 JLabel newCard3 = deck.pullCard(model.pullRandomCard());  //makes whole new card.
                 newCard3.setBounds(this.cardCoordinateX, this.cardCoordinateY, 200, 200);
                 layeredPane.add(newCard3, 0);

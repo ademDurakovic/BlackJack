@@ -61,7 +61,6 @@ public class User{
     public void hit(){
         userHit = true;
         this.canDouble = false;
-        System.out.println("user hit funciton.");
         notifyObservers();     
     }
 
@@ -79,7 +78,6 @@ public class User{
             this.aceCase();
         }
         didUserBust();
-        System.out.println(currentTotal);
         return num;
     }
 

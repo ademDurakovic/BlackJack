@@ -23,7 +23,6 @@ public class Controller implements ControllerInterface{
     // method to hit (draw new card)
     public void userHit()
     {
-        System.out.println("controller hit.");
         this.model.hit();
     }
 
