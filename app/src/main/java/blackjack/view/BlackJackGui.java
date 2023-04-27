@@ -139,10 +139,6 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
                 buttons.enableButtonsAfterBets();
                 this.chips.disableAll();
                 model.setInitialBetPlaced(false);
-                if(deltBlackJack()){
-                    buttons.disableAll();
-                    model.blackJack();
-                }
             }
             else if(model.didUserHit() && model.isUserAbleToHit()){
                 System.out.println("pulling card.");
@@ -156,7 +152,12 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
             } 
             /*Here we check to see if the user busted or  */
             if(model.getHand() >= 21) {
-                controller.userBlackJackorBust();
+                if(model.getTotalCards() == 2 || model.getHand() > 21){
+                    controller.userBlackJackorBust();
+                }
+                else{
+                    controller.userStand();
+                }
             }
         }else if (model.getStatus() && model.isStanding()){
                 System.out.println("in update of new Game.");
@@ -220,10 +221,4 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
 
     }
 
-    public boolean deltBlackJack(){
-        if(model.getHand() == 21){
-            return true;
-        }
-        return false;
-    }
 }

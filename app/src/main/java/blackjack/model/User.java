@@ -165,7 +165,12 @@ public class User{
 
     // betting situations
     public void userWon() {
-        this.currentBalance += (currentBet * 2);
+        if(getTotalCards() == 2 && currentTotal == 21){
+            this.payBlackJack();
+        }
+        else{
+            this.currentBalance += (currentBet * 2);
+        }
         userWon= true;
         System.out.println("userWon");
         notifyObservers();
@@ -272,7 +277,4 @@ public class User{
 
     }
 
-    public boolean gotBlackJack(){
-        return userBlackJack;
-    }
 }

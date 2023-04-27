@@ -20,11 +20,7 @@ public class Table {
     
     // checks the betting situations mentioned in the requirements doc
     public void checkWinner() {
-        System.out.println("Got heere");
-        if(user.gotBlackJack()){
-            user.payBlackJack();
-        }
-        else if (user.getHand() > 21) {
+        if (user.getHand() > 21) {
             user.userLost();
         } else if (dealer.getHand() > 21 ) {         
             user.userWon();
