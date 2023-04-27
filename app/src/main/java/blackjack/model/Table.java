@@ -32,7 +32,6 @@ public class Table {
             } else if (user.getHand() == dealer.getHand()) {           
                 user.userDraw();
             } else if (dealer.getHand() > user.getHand()) {
-             
                 user.userLost();
             }
         }

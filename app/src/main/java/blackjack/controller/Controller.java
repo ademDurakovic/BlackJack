@@ -42,9 +42,12 @@ public class Controller implements ControllerInterface{
     public void userStand(){
         //dealer will start to draw cards.
         this.model.stand();
-        System.out.println("HERE");
         this.dealer.startDrawing();
-        System.out.println("HERE2");
+    }
+
+    public void userBlackJackorBust(){
+        model.stand();
+        dealer.flipCard();
     }
 
     public void dealerDraw() {

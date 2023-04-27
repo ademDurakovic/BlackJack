@@ -13,7 +13,7 @@ public class Dealer {
     private int dealerTotal;
     private boolean doneHitting;
     private boolean dealerIsHitting; // will be used in dealerPanel to see if hes hitting 
-    public boolean userBlackJackorLost = false;
+    private boolean userBlackJackorLost = false;
 
     public Dealer(){
         cardGenerator = new Random();
@@ -29,7 +29,7 @@ public class Dealer {
         notifyObservers();  //notify bet was made. We need to add a blank card and a real one.
         initalDeal = true; //inital has been dealt.
     }
-
+    /*flips the card, this is for blackjack off rip case and when the user busts. */
     public void flipCard(){
         userBlackJackorLost = true;
         notifyObservers();
@@ -37,7 +37,6 @@ public class Dealer {
         this.doneHitting = true;
         notifyObservers();
     }
-
 
     public void register(BlackJackObserver o){
         this.observers.add(o);
@@ -50,7 +49,6 @@ public class Dealer {
         if(dealerTotal > 21) {   // we want to see if the user busts so that we can disable buttons. The currentTotal can change if they have an ace so we must check that.
             this.aceCase();
         }
-        // make functiom
         return num;
     }
 
@@ -78,7 +76,7 @@ public class Dealer {
 
         return total;
     }
-
+    /*Checks for ace. */
     public void aceCase(){
         if (dealerTotal > 21) {
 
@@ -118,10 +116,14 @@ public class Dealer {
         return this.dealerTotal;
     }
 
+    public boolean getUserBJCase(){
+        return userBlackJackorLost;
+    }
+
+    /*resets dealer to starting variables. */
     public void reset() {
         this.dealerHand.clear();
         this.dealerTotal = 0;
-        //this.initalDeal = false;
         this.doneHitting = false;
         this.dealerIsHitting = false;
         notifyObservers();

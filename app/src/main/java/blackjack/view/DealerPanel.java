@@ -52,7 +52,7 @@ public class DealerPanel extends JLayeredPane implements BlackJackObserver {
         System.out.println("update in dealer panel!");
         
         /*Keep adding cards, the model will take care of whenever the dealer goes over 17. */
-        if(dealer.getDealerHitting() || dealer.userBlackJackorLost == true){
+        if(dealer.getDealerHitting() || dealer.getUserBJCase() == true){
             /*Incrementing cards. */
             xCord += 10;
             yCord += 10;

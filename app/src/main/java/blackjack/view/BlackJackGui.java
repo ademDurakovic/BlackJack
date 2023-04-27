@@ -154,25 +154,17 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
                 buttons.disableAll();
                 dealer.startDrawing();
             }
+            /*Here we check to see if the user busted or  */
             if(model.getHand() >= 21) {
-                if(model.getTotalCards() == 2){
-                    model.stand();
-                    dealer.flipCard();
-                }
-                else{
-                    model.stand();
-                    dealer.startDrawing();
-                }
-        
+                controller.userBlackJackorBust();
             }
-        }else if( (model.userLost || model.userDrew || model.userWon) && model.isStanding()){
+        }else if (model.getStatus() && model.isStanding()){
                     System.out.println("in update of new Game.");
                     buttons.enableBeforeBetPlaced();
                     chips.enableAll();
                     mainPanel.revalidate();
                     mainPanel.repaint();
                 }
-
         }
 
     @Override

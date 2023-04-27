@@ -18,9 +18,9 @@ public class User{
     private boolean userHit;
     private int currentTotal;
     private boolean isStanding;
-    public boolean userWon = false;
-    public boolean userLost = false;
-    public boolean userDrew = false;
+    private boolean userWon = false;
+    private boolean userLost = false;
+    private boolean userDrew = false;
     private boolean canDouble;
 
 
@@ -40,25 +40,17 @@ public class User{
         this.canDouble = true;
         currentTotal = 0;
     }
+    /*Checks for BlackJack */
     public boolean isBlackJack(){
         if(currentTotal == 21){
             return true;
         }
         return false;
     }
-
-
     public void initialDeal(){
         this.canDouble = true;
         initialBetPlaced = true;  //bet has been placed, and inital hit takes place.
         initialHit();
-        if(isBlackJack()){
-
-        }
-    }
-
-    public void userBlackJack(){
-
     }
 
     public void initialHit(){
@@ -90,29 +82,13 @@ public class User{
         return num;
     }
 
-    /*CODE FOR BLACKJACK ON RIP */
-    int j = 8;
-    public int pullRandomCard2(){
-        int num =  j;  //grabs random value, deck takes care of suite.
-        playerHand.add(num+2);       //since there is no 0 card we do a +2 increment
-        currentTotal = this.addDeck();
-        if(currentTotal > 21) {   // we want to see if the user busts so that we can disable buttons. The currentTotal can change if they have an ace so we must check that.
-            this.aceCase();
-        }
-        j++;
-        if(j == 10){j = 8;}
-        didUserBust();
-        System.out.println(currentTotal);
-        return num;
-    }
-
     /*checks score to see if it is 21 or over, if so we stand and the dealer will take control. */
     public void didUserBust(){
         if (currentTotal >= 21 && playerHand.size() > 2){
             this.stand();
         }
     }
-    /*COMING IN LATER DELIVERABLE. */
+    /*Double down, user can only pull 1 more card. */
     public boolean doubleDown(){
         if((this.currentBalance - this.currentBet) >= 0 && this.canDouble == true){
             this.currentBalance -= this.currentBet;
@@ -276,5 +252,11 @@ public class User{
         return playerHand.size();
     }
 
-    
+    public boolean getStatus(){
+        if(userLost || userDrew || userWon){
+            return true;
+        }
+        return false;
+
+    }
 }
