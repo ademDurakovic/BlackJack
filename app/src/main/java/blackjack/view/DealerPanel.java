@@ -72,7 +72,6 @@ public class DealerPanel extends JLayeredPane implements BlackJackObserver {
         else if (dealer.isDone()) {
             System.out.println("getting winner!");
             controller.getWinner();
-            dealer.reset();
             xCord = 100;
             yCord = 15;
         }

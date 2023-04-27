@@ -150,22 +150,18 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
                 this.cardCoordinateY -= 5;
                 model.setBetPlaced(false);
             } 
-            else if(model.isStanding()){
-                buttons.disableAll();
-                dealer.startDrawing();
-            }
             /*Here we check to see if the user busted or  */
             if(model.getHand() >= 21) {
                 controller.userBlackJackorBust();
             }
         }else if (model.getStatus() && model.isStanding()){
-                    System.out.println("in update of new Game.");
-                    buttons.enableBeforeBetPlaced();
-                    chips.enableAll();
-                    mainPanel.revalidate();
-                    mainPanel.repaint();
-                }
+                System.out.println("in update of new Game.");
+                buttons.enableBeforeBetPlaced();
+                chips.enableAll();
+                mainPanel.revalidate();
+                mainPanel.repaint();
         }
+    }
 
     @Override
     public void actionPerformed(ActionEvent event)
