@@ -21,6 +21,7 @@ public class User{
     private boolean userWon = false;
     private boolean userLost = false;
     private boolean userDrew = false;
+    private boolean userBlackJack = false;
     private boolean canDouble;
 
 
@@ -186,7 +187,18 @@ public class User{
         newGame();
     }
 
+    public void blackJack(){
+        userBlackJack = true;
+        notifyObservers();
+        newGame();
+    }
+
+    public void payBlackJack(){
+        this.currentBalance += ((currentBet * 3)/2) + currentBet;
+    }    
+
     public void newGame() {
+        userBlackJack = false;
         this.currentTotal = 0;
         this.currentBet = 0;
         this.initialBetPlaced = false;
@@ -258,5 +270,9 @@ public class User{
         }
         return false;
 
+    }
+
+    public boolean gotBlackJack(){
+        return userBlackJack;
     }
 }

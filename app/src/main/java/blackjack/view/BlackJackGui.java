@@ -139,6 +139,10 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
                 buttons.enableButtonsAfterBets();
                 this.chips.disableAll();
                 model.setInitialBetPlaced(false);
+                if(deltBlackJack()){
+                    buttons.disableAll();
+                    model.blackJack();
+                }
             }
             else if(model.didUserHit() && model.isUserAbleToHit()){
                 System.out.println("pulling card.");
@@ -214,5 +218,12 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         layeredPane.add(newCard2, 0);
         this.cards.add(newCard2);
 
+    }
+
+    public boolean deltBlackJack(){
+        if(model.getHand() == 21){
+            return true;
+        }
+        return false;
     }
 }
