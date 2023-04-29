@@ -76,11 +76,11 @@ public class LoanShark implements ActionListener, BlackJackObserver {
         //buttons on loanshark
         this.loanEnterButton = new JButton("Request Loan");
         this.loanEnterButton.addActionListener(this);
-        this.loanEnterButton.setBounds(850, 500, 125, 35);
+        this.loanEnterButton.setBounds(850, 450, 125, 35);
 
         this.payBackAmountButton = new JButton("Pay Back");
         this.payBackAmountButton.addActionListener(this);
-        this.payBackAmountButton.setBounds(850, 450, 125, 35);
+        this.payBackAmountButton.setBounds(850, 500, 125, 35);
 
 
         this.currentDebt = new JLabel("Current Debt: " + user.getDebt()); //changed it will construct upon user debt.

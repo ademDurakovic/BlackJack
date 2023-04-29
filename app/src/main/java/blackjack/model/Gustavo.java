@@ -13,6 +13,7 @@ public class Gustavo {
     }
 
     public void payGustavo(int payment){
+        if (payment < 0 ) { return; }
         if(player.getBalance() >= payment){
             //this conditional makes sure the player can only pay up to the debt amount, not over
             if (payment > player.getDebt()) {
@@ -40,7 +41,7 @@ public class Gustavo {
 
 
     public void borrowMoney(int borrowAmount){
-        
+        if (borrowAmount < 0) { return; }
         if(player.getDebt() + borrowAmount <= 10000){
             player.setDebt(player.getDebt() + borrowAmount);
             player.setBalance(player.getBalance() + borrowAmount);
