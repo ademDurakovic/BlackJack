@@ -12,7 +12,6 @@ public class User{
     private Random cardGenerator;
     private int currentBalance;
     private ArrayList<BlackJackObserver> observers;
-    private int currentDebt;
     private int currentBet;
     private boolean initialBetPlaced;
     private boolean userHit;
@@ -23,6 +22,11 @@ public class User{
     private boolean userDrew = false;
     private boolean userBlackJack = false;
     private boolean canDouble;
+
+    /*Loan Shark variables: */
+    private int currentDebt;
+  
+
 
 
     public User(){
@@ -207,8 +211,8 @@ public class User{
         this.initialBetPlaced = false;
         isStanding = false;
         playerHand.clear();
-        System.out.println("newGame");
         this.isPlaying = true;
+        Gustavo.gustavoMad(this);  //checks to see if balance in 3x debt.
         notifyObservers();
     }
 
@@ -273,6 +277,14 @@ public class User{
         }
         return false;
 
+    }
+
+    public void setBalance(int newBalance){
+        this.currentBalance = newBalance;
+    }
+
+    public void setDebt(int newDebt){
+        this.currentBet = newDebt;
     }
 
 }
