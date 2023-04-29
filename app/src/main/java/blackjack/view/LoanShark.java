@@ -27,7 +27,6 @@ public class LoanShark implements ActionListener, BlackJackObserver {
         this.controller = controller;
         this.user = user;
         this.gustavo = gustavo;
-        this.gustavo.register(this);
 
 
         mainFrame = new JFrame("LoanShark");
@@ -108,7 +107,6 @@ public class LoanShark implements ActionListener, BlackJackObserver {
             //go back to main table. probably setVisible(false)?
         }
     }
-
 
 
 }

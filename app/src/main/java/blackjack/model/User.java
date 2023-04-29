@@ -26,9 +26,6 @@ public class User{
     /*Loan Shark variables: */
     private int currentDebt;
   
-
-
-
     public User(){
         /*Initial Variables. */
         this.initialBetPlaced = false;

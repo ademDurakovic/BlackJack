@@ -22,7 +22,6 @@ public class Gustavo {
         else{
             System.out.println("need more bread.");
         }
-        this.notifyObservers();  //tells loan shark GUI updates the debt.
 
     }
 
@@ -48,22 +47,6 @@ public class Gustavo {
         else{
             System.out.println("Seems you owe gustavo too much for this type of loan");
         }
-        this.notifyObservers();
-
     } 
-
-    public void register(BlackJackObserver o)
-    {
-        this.observers.add(o);
-    }
-
-    public void notifyObservers()
-    {
-        for(BlackJackObserver o: this.observers)
-        {
-            o.update();
-        }
-    }
-
     
 }

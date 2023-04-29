@@ -10,14 +10,18 @@ public class Controller implements ControllerInterface{
     private BlackJackGui view;
     private Dealer dealer;
     private Table table;
+    private LoanShark gustavoGUI;
+    private Gustavo gustavo;
     
-    public Controller(User model, Dealer dealer, Table table)
+    public Controller(User model, Dealer dealer, Table table, Gustavo gustavo)
     {
         this.model = model;
         this.dealer = dealer;
         this.table = table;
+        this.gustavo = gustavo;
+        this.gustavoGUI = new LoanShark(this, model, null);  //GUSTAVO NULL RIGHT NOW
 
-        this.view = new BlackJackGui(this, model, dealer, table);
+        this.view = new BlackJackGui(this, model, dealer, table, gustavoGUI);  // added LS GUI.
     }
 
     // method to hit (draw new card)

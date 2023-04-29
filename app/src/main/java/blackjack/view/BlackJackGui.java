@@ -30,12 +30,16 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
     private Table table;
     private DealerPanel dealerPanel;
     private ArrayList<JLabel> cards;
+    
+    /*FOR LOAN SHARK? */
+    private LoanShark gustavoGUI;
 
-    public BlackJackGui(ControllerInterface controller, User model, Dealer dealer, Table table){
+    public BlackJackGui(ControllerInterface controller, User model, Dealer dealer, Table table, LoanShark gustavo){
         this.cardCoordinateX = 610;
         this.cardCoordinateY = 390;
         this.cards = new ArrayList<JLabel>();
         this.controller = controller;
+        this.gustavoGUI = gustavo; //instance of gustavo THE CONTORLELR WILL MAKE.
         this.model = model;
         this.dealer = dealer;
         deck = new CardDeck();  //creation of cards.
@@ -125,6 +129,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         this.balance.setText("Balance: $" + String.valueOf(model.getBalance()));
         this.debt.setText("Debt: $" + String.valueOf(model.getDebt()));
         this.currentBet.setText("Current Bet: $" + String.valueOf(model.getCurrentBet()));
+        this.gustavoGUI.update();  //CHANGES DEBT AMOUNT ON GUI.
         System.out.println("Hand: " + model.getHand());
         layeredPane.repaint();
         dealerPanel.repaint();
