@@ -190,6 +190,8 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
                         break;
                 case 3: this.controller.userStand();
                         break;
+                case 4: this.controller.showLoanShark();
+                        break;
     
                 default: break;
             }

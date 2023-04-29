@@ -23,6 +23,9 @@ public class LoanShark implements ActionListener, BlackJackObserver {
     private JLayeredPane layeredPane;
     private Gustavo gustavo;
 
+    private JButton loanEnterButton;
+    private JButton payBackAmountButton;
+
     public LoanShark(ControllerInterface controller, User user, Gustavo gustavo){
         this.controller = controller;
         this.user = user;
@@ -59,7 +62,8 @@ public class LoanShark implements ActionListener, BlackJackObserver {
         this.loanEnter.setBounds(820,90,100,35);
 
         this.goBack = new JButton("Go Back");
-        this.goBack.setBounds(850, 550, 75, 25);
+        this.goBack.addActionListener(this);
+        this.goBack.setBounds(850, 550, 125, 35);
 
         this.payBack = new JLabel("Enter Amount to Payback: ");
         this.payBack.setForeground(Color.RED);
@@ -68,6 +72,16 @@ public class LoanShark implements ActionListener, BlackJackObserver {
 
         this.payBackAmount = new JTextField();
         this.payBackAmount.setBounds(825,135,100,35);
+
+        //buttons on loanshark
+        this.loanEnterButton = new JButton("Request Loan");
+        this.loanEnterButton.addActionListener(this);
+        this.loanEnterButton.setBounds(850, 500, 125, 35);
+
+        this.payBackAmountButton = new JButton("Pay Back");
+        this.payBackAmountButton.addActionListener(this);
+        this.payBackAmountButton.setBounds(850, 450, 125, 35);
+
 
         this.currentDebt = new JLabel("Current Debt: " + user.getDebt()); //changed it will construct upon user debt.
         this.currentDebt.setForeground(Color.RED);
@@ -82,29 +96,51 @@ public class LoanShark implements ActionListener, BlackJackObserver {
         this.layeredPane.add(payBackAmount,0);
         this.layeredPane.add(loanEnter, 0);
         this.layeredPane.add(currentDebt,0);
+        this.layeredPane.add(payBackAmountButton,0);
+        this.layeredPane.add(loanEnterButton,0);
 
         this.mainPanel.add(layeredPane);
         this.mainFrame.add(mainPanel);
         this. mainFrame.pack();
-        this.mainFrame.setVisible(true);  //maybe set to false as initial?
+        this.mainFrame.setVisible(false);  //maybe set to false as initial?
+    }
+
+    public void showShark() {
+        this.mainFrame.setVisible(true);
     }
 
     public void update(){
-        currentDebt.setText("Current Debt: " + user.getDebt());
+        currentDebt.setText("Current Debt: $" + user.getDebt());
     }
 
     @Override
     public void actionPerformed(ActionEvent event){
         Object source = event.getSource();
 
-        if(source == loanEnter){
+        if(source == loanEnterButton){
             //controller will do get loan.
+            try {
+                controller.playerRequest(Integer.valueOf(this.loanEnter.getText()));
+            } catch (Exception error) {
+                // do nothing, this is so we dont get exception errors
+                // if the user inputs invalid inputs into the textfield
+                System.out.println("Please input only integers! ex: 1000");
+            }
+            this.loanEnter.setText("");
         }
-        else if(source == payBackAmount){
-            //controller will tell gustavo hes getting AP TMOO out here bud.
+        else if(source == payBackAmountButton){
+            try {
+                if (user.getDebt() > 0){
+                    this.controller.payShark(Integer.valueOf(this.payBackAmount.getText()));
+                }
+                
+            } catch (Exception error) {
+                System.out.println("Please input only integers! ex: 500");
+            }
+            this.payBackAmount.setText("");
         }
         else if(source == goBack){
-            //go back to main table. probably setVisible(false)?
+            this.mainFrame.setVisible(false);
         }
     }
 

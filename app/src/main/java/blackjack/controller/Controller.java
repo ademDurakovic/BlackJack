@@ -24,6 +24,19 @@ public class Controller implements ControllerInterface{
         this.view = new BlackJackGui(this, model, dealer, table, gustavoGUI);  // added LS GUI.
     }
 
+    // loan shark functionalities
+    public void showLoanShark() {
+        this.gustavoGUI.showShark();
+    }
+
+    public void playerRequest(int num){
+        this.gustavo.borrowMoney(num);
+    }
+
+    public void payShark(int num) {
+        this.gustavo.payGustavo(num);
+    }
+
     // method to hit (draw new card)
     public void userHit()
     {

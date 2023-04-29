@@ -42,6 +42,12 @@ public class User{
         this.canDouble = true;
         currentTotal = 0;
     }
+
+    public void playerLoaned(int num) {
+        this.currentDebt += num;
+        this.currentBalance += num;
+        notifyObservers();
+    }
     /*Checks for BlackJack */
     public boolean isBlackJack(){
         if(currentTotal == 21){
@@ -278,10 +284,12 @@ public class User{
 
     public void setBalance(int newBalance){
         this.currentBalance = newBalance;
+        notifyObservers();
     }
 
     public void setDebt(int newDebt){
-        this.currentBet = newDebt;
+        this.currentDebt = newDebt;
+        notifyObservers();
     }
 
 }

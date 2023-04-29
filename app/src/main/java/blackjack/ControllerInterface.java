@@ -8,5 +8,10 @@ public interface ControllerInterface {
     public void getWinner();
     public void dealerDraw();
     public void userDoubleDown();      
-    public void userBlackJackorBust();  
+    public void userBlackJackorBust();
+    
+    //loan shark controller functionalities
+    public void showLoanShark();
+    public void playerRequest(int num);
+    public void payShark(int num);
  }

@@ -1,6 +1,5 @@
 package blackjack.model;
 
-import blackjack.model.User;
 import java.util.ArrayList;
 import blackjack.BlackJackObserver;
 
@@ -13,11 +12,14 @@ public class Gustavo {
         this.observers = new ArrayList<BlackJackObserver>();
     }
 
-    public  void payGustavo(int payment){
-        if(player.getBalance() > payment){
+    public void payGustavo(int payment){
+        if(player.getBalance() >= payment){
+            //this conditional makes sure the player can only pay up to the debt amount, not over
+            if (payment > player.getDebt()) {
+                payment = player.getDebt();
+            }
             player.setBalance(player.getBalance() - payment);  //pays from balance
             player.setDebt(player.getDebt() - payment);
-            player.notifyObservers();
         }
         else{
             System.out.println("need more bread.");

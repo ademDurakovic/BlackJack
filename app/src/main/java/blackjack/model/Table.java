@@ -1,7 +1,6 @@
 package blackjack.model;
 
 import blackjack.BlackJackObserver;
-import blackjack.model.Dealer;
 import java.util.ArrayList;
 
 public class Table {
