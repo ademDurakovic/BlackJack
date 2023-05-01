@@ -3,7 +3,6 @@ package blackjack.model;
 import blackjack.BlackJackObserver;
 
 import java.util.ArrayList;
-import java.io.Serializable;
 
 public class Table {
 

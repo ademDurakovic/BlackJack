@@ -4,7 +4,6 @@ import blackjack.BlackJackObserver;
 
 import java.util.Random;
 import java.util.ArrayList;
-import java.io.Serializable;
 
 public class Dealer {
     private ArrayList<BlackJackObserver> observers;

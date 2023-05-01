@@ -295,7 +295,6 @@ public class User implements Serializable{
     }
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        System.out.println("blud");
         in.defaultReadObject();
         this.observers = new ArrayList<BlackJackObserver>();
     }
