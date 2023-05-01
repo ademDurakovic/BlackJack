@@ -15,6 +15,15 @@ public class Controller implements ControllerInterface{
     private LoanShark gustavoGUI;
     private Gustavo gustavo;
     
+    public Controller() {
+        try{
+            loadFromFile();
+            start();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public Controller(User model, Dealer dealer, Table table, Gustavo gustavo)
     {
         this.model = model;
@@ -77,6 +86,7 @@ public class Controller implements ControllerInterface{
 
     public void getWinner() {
         this.table.checkWinner();
+        this.gustavo.gustavoMad(this.model);  //checks to see if balance in 3x debt.
     }
 
     public void userDoubleDown(){
@@ -97,8 +107,9 @@ public class Controller implements ControllerInterface{
             if(filePath != null){
                 FileOutputStream fileOutputStream = new FileOutputStream(filePath);
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-                objectOutputStream.writeObject(this.model.getBalance());
-                objectOutputStream.writeObject(this.model.getDebt());
+
+                objectOutputStream.writeObject(this.model);
+
                 objectOutputStream.close();
                 fileOutputStream.close();
             }else{
@@ -109,4 +120,20 @@ public class Controller implements ControllerInterface{
             //System.out.println(e.getMessage());
         }
     }
+
+    public void loadFromFile() throws IOException, ClassNotFoundException{
+        String filePath = GameFileSelector.selectLoadFile();
+        FileInputStream fileInputStream = new FileInputStream(filePath);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+        this.model = (User)objectInputStream.readObject();
+        this.dealer = new Dealer();
+        this.table = new Table(this.dealer, this.model);
+        this.gustavo = new Gustavo(this.model);
+
+        objectInputStream.close();
+        fileInputStream.close();
+        System.out.println("Game loaded from file");
+    }
+
 }

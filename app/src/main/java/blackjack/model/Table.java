@@ -5,7 +5,7 @@ import blackjack.BlackJackObserver;
 import java.util.ArrayList;
 import java.io.Serializable;
 
-public class Table implements Serializable{
+public class Table {
 
     private Dealer dealer;
     private User user;

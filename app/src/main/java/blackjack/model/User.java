@@ -6,8 +6,8 @@ import java.io.Serializable;
 import java.lang.reflect.Executable;
 import java.io.*;
 
-import blackjack.view.*;
 import blackjack.BlackJackObserver;
+import blackjack.model.Gustavo;
 
 public class User implements Serializable{
     private ArrayList<Integer> playerHand;
@@ -15,7 +15,7 @@ public class User implements Serializable{
     private boolean isPlaying;
     private Random cardGenerator;
     private int currentBalance;
-    private ArrayList<BlackJackObserver> observers;
+    private transient ArrayList<BlackJackObserver> observers;
     private int currentBet;
     private boolean initialBetPlaced;
     private boolean userHit;
@@ -29,31 +29,11 @@ public class User implements Serializable{
 
     /*Loan Shark variables: */
     private int currentDebt;
-
-    public User(boolean loaded){
-        try{
-            loadFromFile();
-            this.initialBetPlaced = false;
-            this.observers = new ArrayList<BlackJackObserver>();
-            this.playerHand = new ArrayList<Integer>();
-            this.handIndex = 0;
-            this.isPlaying = true;
-            this.cardGenerator = new Random();
-            this.currentBet = 0;
-            this.userHit = false;
-            this.isStanding = false;
-            this.canDouble = true;
-            currentTotal = 0;
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
   
     public User(){
         /*Initial Variables. */
-        this.initialBetPlaced = false;
         this.observers = new ArrayList<BlackJackObserver>();
+        this.initialBetPlaced = false;
         this.playerHand = new ArrayList<Integer>();
         this.currentBalance = 5000;
         this.handIndex = 0;
@@ -239,7 +219,6 @@ public class User implements Serializable{
         isStanding = false;
         playerHand.clear();
         this.isPlaying = true;
-        Gustavo.gustavoMad(this);  //checks to see if balance in 3x debt.
         notifyObservers();
     }
 
@@ -316,14 +295,9 @@ public class User implements Serializable{
         notifyObservers();
     }
 
-    public void loadFromFile() throws IOException, ClassNotFoundException{
-        String filePath = GameFileSelector.selectLoadFile();
-        FileInputStream fileInputStream = new FileInputStream(filePath);
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-        this.currentBalance = (int)objectInputStream.readObject();
-        this.currentDebt = (int)objectInputStream.readObject();
-        objectInputStream.close();
-        fileInputStream.close();
-        System.out.println("Game loaded from file");
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        System.out.println("blud");
+        in.defaultReadObject();
+        this.observers = new ArrayList<BlackJackObserver>();
     }
 }

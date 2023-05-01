@@ -5,13 +5,11 @@ import java.io.Serializable;
 
 import blackjack.BlackJackObserver;
 
-public class Gustavo implements Serializable{
+public class Gustavo {
     private User player;
-    private ArrayList<BlackJackObserver> observers;
 
     public Gustavo(User player){
         this.player = player;
-        this.observers = new ArrayList<BlackJackObserver>();
     }
 
     public void payGustavo(int payment){
@@ -33,7 +31,7 @@ public class Gustavo implements Serializable{
     /* Gustavo finds out you have 3x the amount he loaned you */
     /*Will be called int the newGame() function of user and can be done bc it is static */
 
-    public static void gustavoMad(User player){
+    public void gustavoMad(User player){
         if(player.getBalance() >= player.getDebt() * 3){
             player.setBalance(player.getBalance() - player.getDebt());  //removes debt money from balance.
             player.setDebt(0);  //no more debt

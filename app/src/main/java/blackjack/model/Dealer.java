@@ -6,7 +6,7 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.io.Serializable;
 
-public class Dealer implements Serializable{
+public class Dealer {
     private ArrayList<BlackJackObserver> observers;
     private boolean initalDeal = false;
     private Random cardGenerator;
@@ -22,7 +22,7 @@ public class Dealer implements Serializable{
         observers = new ArrayList<BlackJackObserver>();
         dealerTotal = 0; 
         dealerIsHitting = false; //we must wait till user clicks stand for dealer to hit.
-        doneHitting = false;
+        this.doneHitting = false;
     }
 
     /*Should call this when dealer places bet giving the dealer it's inital card. */

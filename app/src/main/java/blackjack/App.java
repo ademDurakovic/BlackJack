@@ -12,11 +12,7 @@ public class App {
     public static void main(String[] args) {
 
         if(ConfimationText.confirmLoadGame()){
-            User loadedUser = new User(true);
-            Dealer dealer = new Dealer();
-            Table table = new Table(dealer, loadedUser);
-            Gustavo gustavo = new Gustavo(loadedUser);
-            Controller controller = new Controller(loadedUser, dealer, table, gustavo); //controller
+            Controller controller = new Controller(); //controller
         }
         else{
             User player = new User(); // model
