@@ -7,7 +7,6 @@ import java.lang.reflect.Executable;
 import java.io.*;
 
 import blackjack.BlackJackObserver;
-import blackjack.model.Gustavo;
 
 public class User implements Serializable{
     private ArrayList<Integer> playerHand;
