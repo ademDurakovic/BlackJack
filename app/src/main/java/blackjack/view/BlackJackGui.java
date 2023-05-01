@@ -7,10 +7,10 @@ import blackjack.model.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-
 import javax.swing.*;
+import java.io.Serializable;
 
-public class BlackJackGui implements ActionListener, BlackJackObserver{
+public class BlackJackGui implements ActionListener, BlackJackObserver, Serializable{
     JFrame mainFrame;
     JPanel mainPanel;
     ImageIcon ticon;
@@ -39,12 +39,12 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         this.cardCoordinateY = 390;
         this.cards = new ArrayList<JLabel>();
         this.controller = controller;
-        this.gustavoGUI = gustavo; //instance of gustavo THE CONTORLELR WILL MAKE.
         this.model = model;
         this.dealer = dealer;
         deck = new CardDeck();  //creation of cards.
         this.table = table; // table model, keeps track of winner
         this.model.register(this);
+        this.gustavoGUI = gustavo; //instance of gustavo THE CONTORLELR WILL MAKE.
         mainFrame = new JFrame("BlackJack");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -97,12 +97,12 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         balanceAndBet.setOpaque(false);
 
         /*Debt, Balance, and current bet to be displayed to the user: */
-        this.debt = new JLabel("Debt: $0");
+        this.debt = new JLabel("Debt: $" + this.model.getDebt());
         debt.setFont(new Font("serif", Font.CENTER_BASELINE, 24));
         debt.setForeground(new Color(139,0,35));
         debt.setOpaque(false);
 
-        this.balance = new JLabel("Balance: $5,000");
+        this.balance = new JLabel("Balance: $" + this.model.getBalance());
         balance.setFont(new Font("serif", Font.CENTER_BASELINE, 24));
         balance.setForeground(new Color(202,151,74));
         balance.setOpaque(false);
@@ -120,6 +120,14 @@ public class BlackJackGui implements ActionListener, BlackJackObserver{
         secondPanel.add(balanceAndBet);
 
         mainPanel.add(secondPanel);
+
+        // for saving the game
+        mainFrame.addWindowListener(new WindowAdapter() {
+           public void windowClosing(WindowEvent e){
+            controller.userQuit();
+           } 
+        });
+
         mainFrame.pack();
         mainFrame.setVisible(true);
     }

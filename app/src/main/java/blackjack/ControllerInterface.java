@@ -14,4 +14,7 @@ public interface ControllerInterface {
     public void showLoanShark();
     public void playerRequest(int num);
     public void payShark(int num);
+
+    // for loading and saving
+    public void userQuit();
  }

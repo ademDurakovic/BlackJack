@@ -2,10 +2,14 @@ package blackjack.model;
 
 import java.util.Random;
 import java.util.ArrayList;
+import java.io.Serializable;
+import java.lang.reflect.Executable;
+import java.io.*;
 
+import blackjack.view.*;
 import blackjack.BlackJackObserver;
 
-public class User{
+public class User implements Serializable{
     private ArrayList<Integer> playerHand;
     private int handIndex;
     private boolean isPlaying;
@@ -25,6 +29,26 @@ public class User{
 
     /*Loan Shark variables: */
     private int currentDebt;
+
+    public User(boolean loaded){
+        try{
+            loadFromFile();
+            this.initialBetPlaced = false;
+            this.observers = new ArrayList<BlackJackObserver>();
+            this.playerHand = new ArrayList<Integer>();
+            this.handIndex = 0;
+            this.isPlaying = true;
+            this.cardGenerator = new Random();
+            this.currentBet = 0;
+            this.userHit = false;
+            this.isStanding = false;
+            this.canDouble = true;
+            currentTotal = 0;
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
   
     public User(){
         /*Initial Variables. */
@@ -292,4 +316,14 @@ public class User{
         notifyObservers();
     }
 
+    public void loadFromFile() throws IOException, ClassNotFoundException{
+        String filePath = GameFileSelector.selectLoadFile();
+        FileInputStream fileInputStream = new FileInputStream(filePath);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        this.currentBalance = (int)objectInputStream.readObject();
+        this.currentDebt = (int)objectInputStream.readObject();
+        objectInputStream.close();
+        fileInputStream.close();
+        System.out.println("Game loaded from file");
+    }
 }

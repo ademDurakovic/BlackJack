@@ -1,9 +1,11 @@
 package blackjack.model;
 
 import java.util.ArrayList;
+import java.io.Serializable;
+
 import blackjack.BlackJackObserver;
 
-public class Gustavo {
+public class Gustavo implements Serializable{
     private User player;
     private ArrayList<BlackJackObserver> observers;
 

@@ -1,5 +1,7 @@
 package blackjack.controller;
 
+import java.io.*;
+
 import blackjack.ControllerInterface;
 import blackjack.view.*;
 import blackjack.model.*;
@@ -19,9 +21,12 @@ public class Controller implements ControllerInterface{
         this.dealer = dealer;
         this.table = table;
         this.gustavo = gustavo;
-        this.gustavoGUI = new LoanShark(this, model, null);  //GUSTAVO NULL RIGHT NOW
+        start();
+    }
 
-        this.view = new BlackJackGui(this, model, dealer, table, gustavoGUI);  // added LS GUI.
+    public void start(){
+        this.gustavoGUI = new LoanShark(this, model, null);  //GUSTAVO NULL RIGHT NOW
+        this.view = new BlackJackGui(this, this.model, this.dealer, this.table, this.gustavoGUI);
     }
 
     // loan shark functionalities
@@ -79,6 +84,25 @@ public class Controller implements ControllerInterface{
             this.model.hit();
             this.model.stand();
             this.dealer.startDrawing();
+        }
+    }
+
+    public void userQuit(){
+        if(!ConfimationText.confirmSaveGame()){
+            return;
+        }
+        try{
+            String filePath = GameFileSelector.selectSaveFile();
+            System.out.println(filePath);
+            FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(this.model.getBalance());
+            objectOutputStream.writeObject(this.model.getDebt());
+            objectOutputStream.close();
+            fileOutputStream.close();
+        }
+        catch (IOException e){
+            System.out.println(e.getMessage());
         }
     }
 }

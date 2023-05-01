@@ -5,16 +5,25 @@ package blackjack;
 
 import blackjack.model.*;
 import blackjack.controller.*;
+import blackjack.view.ConfimationText;
 
 public class App {
 
     public static void main(String[] args) {
 
-        User player = new User(); // model
-        Dealer dealer = new Dealer();
-        Table table = new Table(dealer, player);
-        Gustavo gustavo = new Gustavo(player);
-
-        Controller controller = new Controller(player, dealer, table, gustavo); //controller
+        if(ConfimationText.confirmLoadGame()){
+            User loadedUser = new User(true);
+            Dealer dealer = new Dealer();
+            Table table = new Table(dealer, loadedUser);
+            Gustavo gustavo = new Gustavo(loadedUser);
+            Controller controller = new Controller(loadedUser, dealer, table, gustavo); //controller
+        }
+        else{
+            User player = new User(); // model
+            Dealer dealer = new Dealer();
+            Table table = new Table(dealer, player);
+            Gustavo gustavo = new Gustavo(player);
+            Controller controller = new Controller(player, dealer, table, gustavo); //controller
+        }
     }
 }
