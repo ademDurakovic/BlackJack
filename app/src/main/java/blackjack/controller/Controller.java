@@ -94,15 +94,19 @@ public class Controller implements ControllerInterface{
         try{
             String filePath = GameFileSelector.selectSaveFile();
             System.out.println(filePath);
-            FileOutputStream fileOutputStream = new FileOutputStream(filePath);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(this.model.getBalance());
-            objectOutputStream.writeObject(this.model.getDebt());
-            objectOutputStream.close();
-            fileOutputStream.close();
+            if(filePath != null){
+                FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+                objectOutputStream.writeObject(this.model.getBalance());
+                objectOutputStream.writeObject(this.model.getDebt());
+                objectOutputStream.close();
+                fileOutputStream.close();
+            }else{
+                return;
+            }
         }
         catch (IOException e){
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
     }
 }
