@@ -6,9 +6,61 @@ package blackjack;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import javax.swing.plaf.TreeUI;
+
+import org.junit.*;
+import blackjack.model.*;
+
 public class AppTest {
-    @Test public void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+
+    User user;
+    Dealer dealer;
+    Table table;
+    
+    @Before
+    public void setUp() {
+        user = new User();
+        dealer = new Dealer();
+        table = new Table(dealer, user);
+    }
+
+    @After
+    public void tearDown(){
+        user = null;
+        dealer = null;
+        table = null;
+    }
+
+    @Test
+    public void userTestHandSize(){
+        user.pullRandomCard();
+        user.pullRandomCard();
+
+        assertEquals("Should have 2 cards", 2, user.getTotalCards());
+    }
+
+    @Test
+    public void userTestBust(){
+        /*Pulling 10 cards to guarantee bust. */
+        user.pullRandomCard();
+        user.pullRandomCard();
+        user.pullRandomCard();
+        user.pullRandomCard();
+        user.pullRandomCard();
+        user.pullRandomCard();
+        user.pullRandomCard();
+        user.pullRandomCard();
+        user.pullRandomCard();
+        user.pullRandomCard();
+
+        assertEquals("User stands after busting", true, user.isStanding());
+    }
+
+    @Test 
+    public void userLoanTest(){
+        user.playerLoaned(100);
+
+        assertEquals("Debt total", 100, user.getDebt());
+        assertEquals("balance total" , 5100, user.getBalance());
     }
 }
