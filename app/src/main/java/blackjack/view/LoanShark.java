@@ -49,6 +49,11 @@ public class LoanShark implements ActionListener, BlackJackObserver {
         JLabel sharkLabel = new JLabel(sharkIcon);
         sharkLabel.setBounds(360, 320, sharkIcon.getIconWidth(), sharkIcon.getIconHeight());
 
+        ImageIcon piana = new ImageIcon(classLoader.getResource("Piana.png"));
+        ImageResizer.resize(0.35, piana);
+        JLabel pianaLabel = new JLabel(piana);
+        pianaLabel.setBounds(100, 275, piana.getIconWidth(), piana.getIconHeight());
+
         ImageIcon officeIcon = new ImageIcon(classLoader.getResource("Office.png"));
         JLabel officeLabel = new JLabel(officeIcon);
         officeLabel.setBounds(0, 0, officeIcon.getIconWidth(), officeIcon.getIconHeight());
@@ -90,6 +95,7 @@ public class LoanShark implements ActionListener, BlackJackObserver {
 
         this.layeredPane.add(sharkLabel,0);
         this.layeredPane.add(officeLabel,1);
+        this.layeredPane.add(pianaLabel, 0);
         this.layeredPane.add(goBack,0);
         this.layeredPane.add(getLoan,0);
         this.layeredPane.add(payBack, 0);
