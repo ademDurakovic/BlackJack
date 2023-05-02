@@ -54,6 +54,11 @@ public class LoanShark implements ActionListener, BlackJackObserver {
         JLabel pianaLabel = new JLabel(piana);
         pianaLabel.setBounds(100, 275, piana.getIconWidth(), piana.getIconHeight());
 
+        ImageIcon pianaShake = new ImageIcon(classLoader.getResource("Piana_Shake.png"));
+        ImageResizer.resize(0.12, pianaShake);
+        JLabel pianaLabelShake = new JLabel(pianaShake);
+        pianaLabelShake.setBounds(700, 395, pianaShake.getIconWidth(), pianaShake.getIconHeight());
+
         ImageIcon officeIcon = new ImageIcon(classLoader.getResource("Office.png"));
         JLabel officeLabel = new JLabel(officeIcon);
         officeLabel.setBounds(0, 0, officeIcon.getIconWidth(), officeIcon.getIconHeight());
@@ -68,7 +73,7 @@ public class LoanShark implements ActionListener, BlackJackObserver {
 
         this.goBack = new JButton("Go Back");
         this.goBack.addActionListener(this);
-        this.goBack.setBounds(850, 550, 125, 35);
+        this.goBack.setBounds(750, 550, 125, 35);
 
         this.payBack = new JLabel("Enter Amount to Payback: ");
         this.payBack.setForeground(Color.RED);
@@ -96,6 +101,7 @@ public class LoanShark implements ActionListener, BlackJackObserver {
         this.layeredPane.add(sharkLabel,0);
         this.layeredPane.add(officeLabel,1);
         this.layeredPane.add(pianaLabel, 0);
+        this.layeredPane.add(pianaLabelShake, 0);
         this.layeredPane.add(goBack,0);
         this.layeredPane.add(getLoan,0);
         this.layeredPane.add(payBack, 0);
