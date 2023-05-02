@@ -96,6 +96,14 @@ public class AppTest {
         assertEquals("balance after drawing: ", 5000, user.getBalance());
     }
 
+    @Test
+    public void payOutBlackJack(){
+        user.increaseBet(100);
+        user.payBlackJack();
+
+        assertEquals("balance after blackjack: ", 5150, user.getBalance());
+    }
+
     @Test 
     public void payOutSequence() {
         user.increaseBet(1000);
