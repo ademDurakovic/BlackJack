@@ -138,7 +138,6 @@ public class BlackJackGui implements ActionListener, BlackJackObserver, Serializ
         this.debt.setText("Debt: $" + String.valueOf(model.getDebt()));
         this.currentBet.setText("Current Bet: $" + String.valueOf(model.getCurrentBet()));
         this.gustavoGUI.update();  //CHANGES DEBT AMOUNT ON GUI.
-        System.out.println("Hand: " + model.getHand());
         layeredPane.repaint();
         dealerPanel.repaint();
 
@@ -152,6 +151,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver, Serializ
                 buttons.enableButtonsAfterBets();
                 this.chips.disableAll();
                 model.setInitialBetPlaced(false);
+                System.out.println("Hand: " + model.getHand());
             }
             else if(model.didUserHit() && model.isUserAbleToHit()){
                 JLabel newCard3 = deck.pullCard(model.pullRandomCard());  //makes whole new card.
@@ -161,6 +161,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver, Serializ
                 this.cardCoordinateX += 30;
                 this.cardCoordinateY -= 5;
                 model.setBetPlaced(false);
+                System.out.println("Hand: " + model.getHand());
             } 
             /*Here we check to see if the user busted or  */
             if(model.getHand() >= 21) {
