@@ -62,10 +62,12 @@ public class DealerPanel extends JLayeredPane implements BlackJackObserver {
             this.cards.add(newCard);
             this.revalidate(); // validate the layout to update the display
             this.repaint(); // repaint the panel to ensure that the new card is displayed 
+            System.out.println("Dealer hand: " + dealer.getHand());
         }
         /*triggered when user clicks bet.  */
         else if (dealer.isInitalDealt() == false){
             initialDealer();
+            System.out.println("Dealer hand: " + dealer.getHand());
         }
         
         else if (dealer.isDone()) {
