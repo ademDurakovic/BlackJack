@@ -72,6 +72,28 @@ public class AppTest {
         assertEquals("bet Total", 1000, user.getCurrentBet());
     }
 
+    @Test
+    public void userDoubleTest() {
+        user.increaseBet(1000);
+        user.doubleDown();
+
+        assertEquals("bet Total", 2000, user.getCurrentBet());
+    }
+
+    @Test
+    public void userCantDouble() {
+        /*Edge case where user hasnt even increased bet. */
+        user.doubleDown();
+        assertEquals("bet Total", 0, user.getCurrentBet());
+    }
+    @Test
+    public void userCantAffordDouble() {
+        user.increaseBet(4000);
+        user.doubleDown();
+
+        assertEquals("bet Total", 4000, user.getCurrentBet());
+    }
+
     @Test 
     public void payOutTest() {
         user.increaseBet(1000);
@@ -146,4 +168,64 @@ public class AppTest {
         assertEquals("User should still have 5000: ", 5000, user.getBalance());
         assertEquals("Debt should be 0", 0, user.getDebt());
     }
+
+    @Test 
+    public void underPayingLoanSharkTest() {
+        user.playerLoaned(2000);
+        loanShark.payGustavo(-3000);
+
+        assertEquals("User should still have 5000: ", 7000, user.getBalance());
+        assertEquals("Debt should be 0", 2000, user.getDebt());
+    }
+
+
+    @Test 
+    public void userHasDoubleDebtAmount() {
+        user.playerLoaned(2000);
+        user.setBalance(10000);
+        loanShark.gustavoMad(user);
+
+        assertEquals("User should still have 5000: ", 8000, user.getBalance());
+        assertEquals("Debt should be 0", 0, user.getDebt());
+    }
+
+    @Test 
+    public void userNoDoubleBetAmount() {
+        user.playerLoaned(2000);
+        user.setBalance(100);
+        loanShark.gustavoMad(user);
+
+        assertEquals("User should still have 5000: ", 100, user.getBalance());
+        assertEquals("Debt should be 0", 2000, user.getDebt());
+    }
+
+
+
+    /*DEALER TESTING:
+     * startDrawing() cannot be tested due to infinite loop.
+     */
+
+    @Test 
+    public void dealerPullCard() {
+        dealer.pullRandomCard();
+        assertTrue("Dealer should have card", 0 < dealer.getHand());
+    }
+
+    @Test 
+    public void dealerReset() {
+        dealer.pullRandomCard();
+        assertTrue("Dealer should have card", 0 < dealer.getHand());
+        dealer.reset();
+
+        assertEquals("card total should be 0", 0, dealer.getHand());
+    }
+
+
+
+
+
+
+
+
+
 }
