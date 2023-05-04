@@ -4,9 +4,6 @@ public class Table {
 
     private Dealer dealer;
     private User user;
-    private boolean draw;
-    private boolean userWon;
-
 
     public Table(Dealer dealer, User user) {
         this.dealer = dealer;
