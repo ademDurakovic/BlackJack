@@ -34,7 +34,7 @@ public class Controller implements ControllerInterface{
     }
 
     public void start(){
-        this.gustavoGUI = new LoanShark(this, model, null);  //GUSTAVO NULL RIGHT NOW
+        this.gustavoGUI = new LoanShark(this, model);
         this.view = new BlackJackGui(this, this.model, this.dealer, this.table, this.gustavoGUI);
     }
 
@@ -65,7 +65,6 @@ public class Controller implements ControllerInterface{
     // tells the model the player placed the bet
     public void userPlacedBet(){
         this.model.placeBet();
-      //  this.dealer.initalDeal();
     }
 
     //tells the model the player stood
@@ -118,7 +117,7 @@ public class Controller implements ControllerInterface{
             }
         }
         catch (IOException e){
-            //System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 

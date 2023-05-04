@@ -8,9 +8,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
-import java.io.Serializable;
 
-public class BlackJackGui implements ActionListener, BlackJackObserver, Serializable{
+public class BlackJackGui implements ActionListener, BlackJackObserver{
     JFrame mainFrame;
     JPanel mainPanel;
     ImageIcon ticon;
@@ -31,7 +30,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver, Serializ
     private DealerPanel dealerPanel;
     private ArrayList<JLabel> cards;
     
-    /*FOR LOAN SHARK? */
+    /*FOR LOAN SHARK*/
     private LoanShark gustavoGUI;
 
     public BlackJackGui(ControllerInterface controller, User model, Dealer dealer, Table table, LoanShark gustavo){
@@ -44,13 +43,9 @@ public class BlackJackGui implements ActionListener, BlackJackObserver, Serializ
         deck = new CardDeck();  //creation of cards.
         this.table = table; // table model, keeps track of winner
         this.model.register(this);
-        this.gustavoGUI = gustavo; //instance of gustavo THE CONTORLELR WILL MAKE.
+        this.gustavoGUI = gustavo; //instance of gustavo THE CONTROLLER WILL MAKE.
         mainFrame = new JFrame("BlackJack");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //used to get screen dimensions (WILL USE LATER ON.)
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screen = toolkit.getScreenSize();
 
         mainPanel = new JPanel();
         mainPanel.setPreferredSize(new Dimension(1440,900));
@@ -62,7 +57,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver, Serializ
         ClassLoader classLoader = getClass().getClassLoader();
         ImageIcon ticon = new ImageIcon(classLoader.getResource("blackjack_table.png"));  //blackJack table
 
-        /* creation pf layered pane with table backround*/
+        /* creation of layered pane with table backround*/
         layeredPane = new JLayeredPane();   
         layeredPane.setPreferredSize(new Dimension(500, 500));
         JLabel backgroundLabel = new JLabel(ticon);
@@ -163,7 +158,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver, Serializ
                 model.setBetPlaced(false);
                 System.out.println("Hand: " + model.getHand());
             } 
-            /*Here we check to see if the user busted or  */
+            /*Here we check to see if the user busted */
             if(model.getHand() >= 21 && !model.userDoubled()) {
                 if(model.getTotalCards() == 2 || model.getHand() > 21){
                     controller.userBlackJackorBust();
@@ -219,6 +214,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver, Serializ
         dealerPanel.removeCards();
     }
 
+    // initial deal, pulls two cards
     public void initialDealing() {
         this.cardCoordinateX = 610;
         this.cardCoordinateY = 390;

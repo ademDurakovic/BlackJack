@@ -1,9 +1,5 @@
 package blackjack.model;
 
-import blackjack.BlackJackObserver;
-
-import java.util.ArrayList;
-
 public class Table {
 
     private Dealer dealer;

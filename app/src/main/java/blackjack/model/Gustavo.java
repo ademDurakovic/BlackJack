@@ -1,7 +1,5 @@
 package blackjack.model;
 
-import java.util.ArrayList;
-
 public class Gustavo {
     private User player;
 

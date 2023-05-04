@@ -3,7 +3,6 @@ package blackjack.model;
 import java.util.Random;
 import java.util.ArrayList;
 import java.io.Serializable;
-import java.lang.reflect.Executable;
 import java.io.*;
 
 import blackjack.BlackJackObserver;
@@ -213,6 +212,7 @@ public class User implements Serializable{
         this.currentBalance += ((currentBet * 3)/2) + currentBet;
     }    
 
+    // starts new game
     public void newGame() {
         this.doubled = false;
         userBlackJack = false;

@@ -8,7 +8,6 @@ import blackjack.BlackJackObserver;
 import blackjack.ControllerInterface;
 import blackjack.model.*;
 
-/* Jframe and screen for the loan shark that is to be implemented later */
 public class LoanShark implements ActionListener, BlackJackObserver {
     public JFrame mainFrame;
     public JPanel mainPanel;
@@ -21,16 +20,13 @@ public class LoanShark implements ActionListener, BlackJackObserver {
     private JTextField payBackAmount;
     private JLabel payBack;
     private JLayeredPane layeredPane;
-    private Gustavo gustavo;
 
     private JButton loanEnterButton;
     private JButton payBackAmountButton;
 
-    public LoanShark(ControllerInterface controller, User user, Gustavo gustavo){
+    public LoanShark(ControllerInterface controller, User user){
         this.controller = controller;
         this.user = user;
-        this.gustavo = gustavo;
-
 
         mainFrame = new JFrame("LoanShark");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,11 +49,6 @@ public class LoanShark implements ActionListener, BlackJackObserver {
         ImageResizer.resize(0.35, piana);
         JLabel pianaLabel = new JLabel(piana);
         pianaLabel.setBounds(100, 275, piana.getIconWidth(), piana.getIconHeight());
-
-        ImageIcon pianaShake = new ImageIcon(classLoader.getResource("Piana_Shake.png"));
-        ImageResizer.resize(0.12, pianaShake);
-        JLabel pianaLabelShake = new JLabel(pianaShake);
-        pianaLabelShake.setBounds(700, 395, pianaShake.getIconWidth(), pianaShake.getIconHeight());
 
         ImageIcon officeIcon = new ImageIcon(classLoader.getResource("Office.png"));
         JLabel officeLabel = new JLabel(officeIcon);
@@ -101,7 +92,6 @@ public class LoanShark implements ActionListener, BlackJackObserver {
         this.layeredPane.add(sharkLabel,0);
         this.layeredPane.add(officeLabel,1);
         this.layeredPane.add(pianaLabel, 0);
-        this.layeredPane.add(pianaLabelShake, 0);
         this.layeredPane.add(goBack,0);
         this.layeredPane.add(getLoan,0);
         this.layeredPane.add(payBack, 0);
@@ -114,7 +104,7 @@ public class LoanShark implements ActionListener, BlackJackObserver {
         this.mainPanel.add(layeredPane);
         this.mainFrame.add(mainPanel);
         this. mainFrame.pack();
-        this.mainFrame.setVisible(false);  //maybe set to false as initial?
+        this.mainFrame.setVisible(false); 
     }
 
     public void showShark() {
