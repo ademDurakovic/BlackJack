@@ -41,20 +41,24 @@ public class AppTest {
 
     @Test
     public void userTestBust(){
+
         /*Pulling 11 cards to guarantee bust. */
-        user.pullRandomCard();
-        user.pullRandomCard();
-        user.pullRandomCard();
-        user.pullRandomCard();
-        user.pullRandomCard();
-        user.pullRandomCard();
-        user.pullRandomCard();
-        user.pullRandomCard();
-        user.pullRandomCard();
-        user.pullRandomCard();
-        user.pullRandomCard();
+        for(int i=0; i<11; i++) {
+            user.pullRandomCard();
+        }
 
         assertEquals("User stands after busting", true, user.isStanding());
+    }
+
+    @Test
+    public void userTestBust2(){
+
+        /* Pulling 1 card  means the max the hand value should be is 11
+         *  which also means the user did not automatically stand/bust
+         */
+        user.pullRandomCard();
+        
+        assertEquals("User stands after busting", false, user.isStanding());
     }
 
     @Test 
@@ -70,6 +74,43 @@ public class AppTest {
         user.increaseBet(1000);
 
         assertEquals("bet Total", 1000, user.getCurrentBet());
+    }
+
+    @Test 
+    public void addDeck() {
+        user.pullRandomCard();
+        user.pullRandomCard();
+
+        int deckHand = user.addDeck();
+
+        assertNotEquals("Should have a value other than 0: ", 0, deckHand);
+    }
+
+    @Test 
+    public void addingDeckBetweenMultipleGames() {
+        user.pullRandomCard();
+        user.pullRandomCard();
+        int deckHand = user.addDeck();
+        assertNotEquals("Should have a value other than 0: ", 0, deckHand);
+
+        user.newGame();
+
+        user.pullRandomCard();
+        user.pullRandomCard();
+        user.pullRandomCard();
+        int hand = user.addDeck();
+        assertNotEquals("Should have a value other than 0: ", 0, hand);
+    }
+
+    @Test 
+    public void newGameTest() {
+        user.increaseBet(1000);
+        user.pullRandomCard();
+        user.pullRandomCard();
+
+        user.newGame();
+
+        assertEquals("new game means 0 bets", 0, user.getCurrentBet());
     }
 
     @Test
@@ -178,7 +219,6 @@ public class AppTest {
         assertEquals("Debt should be 0", 2000, user.getDebt());
     }
 
-
     @Test 
     public void userHasDoubleDebtAmount() {
         user.playerLoaned(2000);
@@ -199,8 +239,6 @@ public class AppTest {
         assertEquals("Debt should be 0", 2000, user.getDebt());
     }
 
-
-
     /*DEALER TESTING:
      * startDrawing() cannot be tested due to infinite loop.
      */
@@ -219,13 +257,5 @@ public class AppTest {
 
         assertEquals("card total should be 0", 0, dealer.getHand());
     }
-
-
-
-
-
-
-
-
 
 }

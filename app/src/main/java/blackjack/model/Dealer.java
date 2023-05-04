@@ -46,9 +46,8 @@ public class Dealer {
         int num =  this.cardGenerator.nextInt(10);  //grabs random value, deck takes care of suite.
         dealerHand.add(num+2);       //since there is no 0 card we do a +2 increment
         dealerTotal = this.addDeck();
-        if(dealerTotal > 21) {   // we want to see if the user busts so that we can disable buttons. The currentTotal can change if they have an ace so we must check that.
-            this.aceCase();
-        }
+        this.aceCase();
+        
         return num;
     }
 

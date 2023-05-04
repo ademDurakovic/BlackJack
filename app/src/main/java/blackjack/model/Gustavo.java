@@ -20,7 +20,7 @@ public class Gustavo {
             player.setDebt(player.getDebt() - payment);
         }
         else{
-            System.out.println("need more bread.");
+            System.out.println("need more money.");
         }
 
     }

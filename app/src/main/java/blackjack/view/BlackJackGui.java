@@ -173,7 +173,6 @@ public class BlackJackGui implements ActionListener, BlackJackObserver, Serializ
                 }
             }
         }else if (model.getStatus() && model.isStanding()){
-                System.out.println("in update of new Game.");
                 buttons.enableBeforeBetPlaced();
                 chips.enableAll();
                 mainPanel.revalidate();
