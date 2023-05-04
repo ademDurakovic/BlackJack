@@ -25,12 +25,14 @@ public class User implements Serializable{
     private boolean userDrew = false;
     private boolean userBlackJack = false;
     private boolean canDouble;
+    private boolean doubled;
 
     /*Loan Shark variables: */
     private int currentDebt;
   
     public User(){
         /*Initial Variables. */
+        this.doubled = false;
         this.observers = new ArrayList<BlackJackObserver>();
         this.initialBetPlaced = false;
         this.playerHand = new ArrayList<Integer>();
@@ -103,6 +105,7 @@ public class User implements Serializable{
             this.currentBalance -= this.currentBet;
             this.currentBet *= 2;
             notifyObservers();
+            this.doubled = true;
             return true;
         }
         return false;
@@ -211,6 +214,7 @@ public class User implements Serializable{
     }    
 
     public void newGame() {
+        this.doubled = false;
         userBlackJack = false;
         this.currentTotal = 0;
         this.currentBet = 0;
@@ -282,6 +286,10 @@ public class User implements Serializable{
         }
         return false;
 
+    }
+
+    public boolean userDoubled() {
+        return this.doubled;
     }
 
     public void setBalance(int newBalance){

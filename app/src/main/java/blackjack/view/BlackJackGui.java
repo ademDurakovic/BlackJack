@@ -164,7 +164,7 @@ public class BlackJackGui implements ActionListener, BlackJackObserver, Serializ
                 System.out.println("Hand: " + model.getHand());
             } 
             /*Here we check to see if the user busted or  */
-            if(model.getHand() >= 21) {
+            if(model.getHand() >= 21 && !model.userDoubled()) {
                 if(model.getTotalCards() == 2 || model.getHand() > 21){
                     controller.userBlackJackorBust();
                 }
